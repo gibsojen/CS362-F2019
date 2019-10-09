@@ -1,4 +1,5 @@
 #include "dominion.h"
+#include "kingdom_cards.h"
 #include <stdio.h>
 #include "rngs.h"
 #include <stdlib.h>

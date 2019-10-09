@@ -1,5 +1,6 @@
 #include "dominion.h"
 #include "dominion_helpers.h"
+#include "kingdom_cards.h"
 #include "rngs.h"
 #include <stdio.h>
 #include <math.h>
@@ -887,7 +888,10 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         //discard played card from hand
         discardCard(handPos, currentPlayer, state, 0);
         return 0;
-
+    
+    case baron:
+	baronCard (card, choice1, choice2, choice3, state, handPos, bonus, currentPlayer);
+/*
     case baron:
         state->numBuys++;//Increase buys by 1!
         if (choice1 > 0) { //Boolean true or going to discard an estate
@@ -940,6 +944,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
 
         return 0;
+
+*/
 
     case great_hall:
         //+1 Card

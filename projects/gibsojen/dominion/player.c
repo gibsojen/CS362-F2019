@@ -18,7 +18,7 @@
 #include "dominion.h"
 #include "interface.h"
 #include "rngs.h"
-
+#include "kingdom_cards.h"
 
 int main2(int argc, char *argv[]) {
     //Default cards, as defined in playDom
