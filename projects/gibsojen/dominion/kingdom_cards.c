@@ -293,7 +293,8 @@ int tributeCard (int card, struct gameState *state, int handPos, int currentPlay
 
 }
 
-/*
+
+
 int mineCard (int card, int choice1, int choice2, struct gameState *state, int handPos, int currentPlayer) {
 
 	int i;
@@ -335,4 +336,3 @@ int mineCard (int card, int choice1, int choice2, struct gameState *state, int h
 
 }
 
-*/

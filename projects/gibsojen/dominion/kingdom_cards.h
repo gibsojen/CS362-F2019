@@ -10,7 +10,7 @@ int ambassadorCard (int card, int choice1, int choice2, struct gameState *state,
 
 int tributeCard (int card, struct gameState *state, int handPos, int currentPlayer);
 
-
+int mineCard (int card, int choice1, int choice2, struct gameState *state, int handPos, int currentPlayer);
 
 // for testing only
 //int smithyCard (int card, int choice1, struct gameState *state, int handPos, int *bonus,
