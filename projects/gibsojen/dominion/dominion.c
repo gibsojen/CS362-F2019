@@ -696,7 +696,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     int currentPlayer = whoseTurn(state);
     int nextPlayer = currentPlayer + 1;
 
-    int tributeRevealedCards[2] = {-1, -1};
+    //int tributeRevealedCards[2] = {-1, -1};
     int temphand[MAX_HAND];// moved above the if statement
     int drawntreasure=0;
     int cardDrawn;
@@ -945,6 +945,9 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case tribute:
+
+
+/*
         if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
             if (state->deckCount[nextPlayer] > 0) {
                 tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
@@ -1000,8 +1003,10 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
                 state->numActions = state->numActions + 2;
             }
         }
-
+*/
         return 0;
+
+
 
     case ambassador:
  	printf("---------------------------------------------------------------------In AMBASSADOR\n");
