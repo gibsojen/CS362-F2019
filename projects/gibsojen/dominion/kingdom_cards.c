@@ -39,14 +39,14 @@ int smithyCard (int card, int choice1, struct gameState *state, int handPos, int
 int baronCard (int choice1, struct gameState *state, int currentPlayer) {
 
 	state->numBuys++;//Increase buys by 1!
-        if (choice1 > 0) { //Boolean true or going to discard an estate
+        if (choice1 >= 0) { //Boolean true or going to discard an estate  //introduced bug from > to >=
             int p = 0;//Iterator for hand!
             int card_not_discarded = 1;//Flag for discard set!
             while(card_not_discarded) {
                 if (state->hand[currentPlayer][p] == estate) { //Found an estate card!
                     state->coins += 4;//Add 4 coins to the amount of coins
                     state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];
-                    state->discardCount[currentPlayer]++;
+                    //state->discardCount[currentPlayer]++;  introduced bug by removing this line
                     for (; p < state->handCount[currentPlayer]; p++) {
                         state->hand[currentPlayer][p] = state->hand[currentPlayer][p+1];
                     }
@@ -99,7 +99,7 @@ int minionCard (int choice1, int choice2, struct gameState *state, int handPos, 
 
 	if (choice1)
         {
-            state->coins = state->coins + 2;
+            state->coins = state->coins + 4;  //introduced bug...changed from 2 coins to 4
         }
         else if (choice2)		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
         {
@@ -116,7 +116,7 @@ int minionCard (int choice1, int choice2, struct gameState *state, int handPos, 
             }
 
             //other players discard hand and redraw if hand size > 4
-            for (i = 0; i < state->numPlayers; i++)
+            for (i = 0; i <= state->numPlayers; i++)  // introduced bug from < to <=
             {
                 if (i != currentPlayer)
                 {
@@ -153,7 +153,7 @@ int ambassadorCard (int choice1, int choice2, struct gameState *state, int handP
 
         j = 0;		//used to check if player has enough cards to discard
 
-        if (choice2 > 2 || choice2 < 0)
+        if (choice2 > 2 && choice2 < 0)  // introduced bug.  changed from || to &&
         {
             return -1;
         }
@@ -170,7 +170,7 @@ int ambassadorCard (int choice1, int choice2, struct gameState *state, int handP
                 j++;
             }
         }
-        if (j < choice2)
+        if (j < choice2) 
         {
             return -1;
         }
@@ -200,7 +200,7 @@ int ambassadorCard (int choice1, int choice2, struct gameState *state, int handP
             {
                 if (state->hand[currentPlayer][i] == state->hand[currentPlayer][choice1])
                 {
-                    discardCard(i, currentPlayer, state, 1);
+                    discardCard(i, currentPlayer, state, 0);  //intro bug.  changed to discard instead of trash, from 1 to 0
                     break;
                 }
             }
@@ -241,7 +241,7 @@ int tributeCard (struct gameState *state, int currentPlayer) {
 
         else {
             if (state->deckCount[nextPlayer] == 0) {
-                for (i = 0; i < state->discardCount[nextPlayer]; i++) {
+                for (i = 0; i <= state->discardCount[nextPlayer]; i++) {  // intro bug.  changed from < to <=
                     state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
                     state->deckCount[nextPlayer]++;
                     state->discard[nextPlayer][i] = -1;
@@ -274,7 +274,7 @@ int tributeCard (struct gameState *state, int currentPlayer) {
                 drawCard(currentPlayer, state);
             }
             else { //Action Card
-                state->numActions = state->numActions + 2;
+                state->numActions = state->numActions - 2;  //intro bug. changed from +2 to -2.
             }
         }
 
@@ -290,14 +290,14 @@ int mineCard (int choice1, int choice2, struct gameState *state, int handPos, in
 	int i;
 	int j;
 
-        j = state->hand[currentPlayer][choice1];  //store card we will trash
+        j = state->hand[currentPlayer][choice2];  //store card we will trash   // intro bug. trash wrong card.  change choice1 to choice2
 
         if (state->hand[currentPlayer][choice1] < copper || state->hand[currentPlayer][choice1] > gold)
         {
             return -1;
         }
 
-        if (choice2 > treasure_map || choice2 < curse)
+        if (choice2 < treasure_map || choice2 > curse) // intro bug.  changed from choice2 > treasure_map || choice2 < curse to what's shown
         {
             return -1;
         }
