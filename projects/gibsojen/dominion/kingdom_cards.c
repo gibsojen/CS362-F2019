@@ -1,7 +1,23 @@
 #include "dominion.h"
+#include "dominion_helpers.h"
 #include <stdio.h>
 //#include <math.h>
 #include <stdlib.h>
+
+
+
+
+// remove an estate from the supply
+// this is a helper function
+int remEstateSupply (struct gameState *state) {
+	state->supplyCount[estate]--;//Decrement Estates
+        if (supplyCount(estate, state) == 0) {
+        	isGameOver(state);
+        }
+	return 0;
+}
+
+
 
 // for testing only
 /*
@@ -20,23 +36,7 @@ int smithyCard (int card, int choice1, struct gameState *state, int handPos, int
 }
 */
 
-int baronCard (int card, int choice1, struct gameState *state, int handPos, int currentPlayer) {
-    //int i;
-    //int j;
-    //int k;
-    //int x;
-    //int index;
-    //int currentPlayer = whoseTurn(state);
-    int nextPlayer = currentPlayer + 1;
-
-    //int tributeRevealedCards[2] = {-1, -1};
-    //int temphand[MAX_HAND];// moved above the if statement
-    //int drawntreasure=0;
-    //int cardDrawn;
-    //int z = 0;// this is the counter for the temp hand
-    if (nextPlayer > (state->numPlayers - 1)) {
-        nextPlayer = 0;
-    }
+int baronCard (int choice1, struct gameState *state, int currentPlayer) {
 
 	state->numBuys++;//Increase buys by 1!
         if (choice1 > 0) { //Boolean true or going to discard an estate
@@ -62,10 +62,7 @@ int baronCard (int card, int choice1, struct gameState *state, int handPos, int 
                     if (supplyCount(estate, state) > 0) {
                         gainCard(estate, state, 0, currentPlayer);
 
-                        state->supplyCount[estate]--;//Decrement estates
-                        if (supplyCount(estate, state) == 0) {
-                            isGameOver(state);
-                        }
+			remEstateSupply(state);
                     }
                     card_not_discarded = 0;//Exit the loop
                 }
@@ -80,10 +77,7 @@ int baronCard (int card, int choice1, struct gameState *state, int handPos, int 
             if (supplyCount(estate, state) > 0) {
                 gainCard(estate, state, 0, currentPlayer);//Gain an estate
 
-                state->supplyCount[estate]--;//Decrement Estates
-                if (supplyCount(estate, state) == 0) {
-                    isGameOver(state);
-                }
+		remEstateSupply(state);
             }
         }
 
@@ -92,16 +86,12 @@ int baronCard (int card, int choice1, struct gameState *state, int handPos, int 
 
 
 
-int minionCard (int card, int choice1, int choice2, struct gameState *state, int handPos, int currentPlayer) {
+int minionCard (int choice1, int choice2, struct gameState *state, int handPos, int currentPlayer) {
 
 	int i;
 	int j;
-    	int nextPlayer = currentPlayer + 1;
-    	if (nextPlayer > (state->numPlayers - 1)) {
-        	nextPlayer = 0;
-    	}
-
-        //+1 action
+        
+	//+1 action
         state->numActions++;
 
         //discard card from hand
@@ -155,7 +145,7 @@ int minionCard (int card, int choice1, int choice2, struct gameState *state, int
 
 
 
-int ambassadorCard (int card, int choice1, int choice2, struct gameState *state, int handPos, int currentPlayer) {
+int ambassadorCard (int choice1, int choice2, struct gameState *state, int handPos, int currentPlayer) {
 
 	int i;
 	int j;
@@ -222,7 +212,7 @@ int ambassadorCard (int card, int choice1, int choice2, struct gameState *state,
 
 
 
-int tributeCard (int card, struct gameState *state, int handPos, int currentPlayer) {
+int tributeCard (struct gameState *state, int currentPlayer) {
 
 	int i;
     	int nextPlayer = currentPlayer + 1;
@@ -295,7 +285,7 @@ int tributeCard (int card, struct gameState *state, int handPos, int currentPlay
 
 
 
-int mineCard (int card, int choice1, int choice2, struct gameState *state, int handPos, int currentPlayer) {
+int mineCard (int choice1, int choice2, struct gameState *state, int handPos, int currentPlayer) {
 
 	int i;
 	int j;
