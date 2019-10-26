@@ -16,6 +16,9 @@ playdom: dominion.o playdom.c
 testDrawCard: testDrawCard.c dominion.o rngs.o kingdom_cards.o
 	gcc  -o testDrawCard -g  testDrawCard.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
 
+unittest1:  unittest1.c dominion.o rngs.o kingdomcards.o
+	gcc -o unittest1 -g unittest1.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
+
 interface.o: interface.h interface.c
 	gcc -c interface.c -g  $(CFLAGS)
 
@@ -30,5 +33,33 @@ player: player.c interface.o
 
 all: playdom player 
 
+unittestresults: dominion.o
+	
+	echo "Result for running Unit 1 tests:" > unittestresults.out
+	echo "unittest1.c:" >> unittestresults.out
+	gcc -o unittest1 -g unittest1.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
+	./unittest1 >> unittestresults.out
+	gcov unittest1.c >> unittestresults.out
+
+#	echo "unittest2.c:" >> tests.out
+#	gcc -o unittest2 compare.c bst.c unittest2.c $(CFLAGS)
+#	./unittest2 >> tests.out
+#	gcov bst.c >> tests.out
+	
+#	echo "unittest3.c:" >> tests.out
+#	gcc -o unittest3 compare.c bst.c unittest3.c $(CFLAGS)
+#	./unittest3 >> tests.out
+#	gcov bst.c >> tests.out
+	
+#	echo "unittest4.c:" >> tests.out
+#	gcc -o unittest4 compare.c bst.c unittest4.c $(CFLAGS)
+#	./unittest4 >> tests.out
+#	gcov bst.c >> tests.out
+	
+#	echo "unittest5.c:" >> tests.out
+#	gcc -o unittest5 compare.c bst.c unittest5.c $(CFLAGS)
+#	./unittest5 >> tests.out
+#	gcov bst.c >> tests.out
+
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unittest1
