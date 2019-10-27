@@ -812,7 +812,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
 
     case mine:
- 	printf("---------------------------------------------------------------------In MINE\n");
 	mineCard (choice1, choice2, state, handPos, currentPlayer);
         return 0;
 
@@ -872,7 +871,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
     
     case baron:
- 	printf("---------------------------------------------------------------------In BARON\n");
 	baronCard (choice1, state, currentPlayer);
  	return 0;
 
@@ -889,7 +887,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
 
     case minion:
- 	printf("-----------------------------------------------------------------In MINION\n");
 	minionCard (choice1, choice2, state, handPos, currentPlayer);
 	return 0;
 
@@ -917,14 +914,12 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case tribute:
- 	printf("---------------------------------------------------------------------In TRIBUTE\n");
 	tributeCard (state, currentPlayer);
 	return 0;
 
 
 
     case ambassador:
- 	printf("---------------------------------------------------------------------In AMBASSADOR\n");
 	ambassadorCard (choice1, choice2, state, handPos, currentPlayer);
         return 0;
 
