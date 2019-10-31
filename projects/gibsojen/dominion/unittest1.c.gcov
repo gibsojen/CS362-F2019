@@ -1,0 +1,407 @@
+        -:    0:Source:unittest1.c
+        -:    0:Graph:unittest1.gcno
+        -:    0:Data:unittest1.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include "kingdom_cards.h"
+        -:    4:#include <stdio.h>
+        -:    5:#include "rngs.h"
+        -:    6:#include <stdlib.h>
+        -:    7:#include <string.h>
+        -:    8:
+       29:    9:void cardNumToName(int card, char *name) {
+       29:   10:    switch(card) {
+        -:   11:    case curse:
+    #####:   12:        strcpy(name,"Curse");
+    #####:   13:        break;
+        -:   14:    case estate:
+       11:   15:        strcpy(name,"Estate");
+       11:   16:        break;
+        -:   17:    case duchy:
+    #####:   18:        strcpy(name,"Duchy");
+    #####:   19:        break;
+        -:   20:    case province:
+    #####:   21:        strcpy(name,"Province");
+    #####:   22:        break;
+        -:   23:    case copper:
+       18:   24:        strcpy(name,"Copper");
+       18:   25:        break;
+        -:   26:    case silver:
+    #####:   27:        strcpy(name,"Silver");
+    #####:   28:        break;
+        -:   29:    case gold:
+    #####:   30:        strcpy(name,"Gold");
+    #####:   31:        break;
+        -:   32:    case adventurer:
+    #####:   33:        strcpy(name,"Adventurer");
+    #####:   34:        break;
+        -:   35:    case council_room:
+    #####:   36:        strcpy(name,"Council Room");
+    #####:   37:        break;
+        -:   38:    case feast:
+    #####:   39:        strcpy(name,"Feast");
+    #####:   40:        break;
+        -:   41:    case gardens:
+    #####:   42:        strcpy(name,"Gardens");
+    #####:   43:        break;
+        -:   44:    case mine:
+    #####:   45:        strcpy(name,"Mine");
+    #####:   46:        break;
+        -:   47:    case remodel:
+    #####:   48:        strcpy(name,"Remodel");
+    #####:   49:        break;
+        -:   50:    case smithy:
+    #####:   51:        strcpy(name,"Smithy");
+    #####:   52:        break;
+        -:   53:    case village:
+    #####:   54:        strcpy(name,"Village");
+    #####:   55:        break;
+        -:   56:    case baron:
+    #####:   57:        strcpy(name,"Baron");
+    #####:   58:        break;
+        -:   59:    case great_hall:
+    #####:   60:        strcpy(name,"Great Hall");
+    #####:   61:        break;
+        -:   62:    case minion:
+    #####:   63:        strcpy(name,"Minion");
+    #####:   64:        break;
+        -:   65:    case steward:
+    #####:   66:        strcpy(name,"Steward");
+    #####:   67:        break;
+        -:   68:    case tribute:
+    #####:   69:        strcpy(name,"Tribute");
+    #####:   70:        break;
+        -:   71:    case ambassador:
+    #####:   72:        strcpy(name,"Ambassador");
+    #####:   73:        break;
+        -:   74:    case cutpurse:
+    #####:   75:        strcpy(name,"Cutpurse");
+    #####:   76:        break;
+        -:   77:    case embargo:
+    #####:   78:        strcpy(name,"Embargo");
+    #####:   79:        break;
+        -:   80:    case outpost:
+    #####:   81:        strcpy(name,"Outpost");
+    #####:   82:        break;
+        -:   83:    case salvager:
+    #####:   84:        strcpy(name,"Salvager");
+    #####:   85:        break;
+        -:   86:    case sea_hag:
+    #####:   87:        strcpy(name,"Sea Hag");
+    #####:   88:        break;
+        -:   89:    case treasure_map:
+    #####:   90:        strcpy(name,"Treasure Map");
+    #####:   91:        break;
+        -:   92:
+        -:   93:    default:
+    #####:   94:        strcpy(name,"?");
+        -:   95:    }
+        -:   96:
+       29:   97:}
+        -:   98:
+        -:   99:
+        -:  100:
+        -:  101:
+        1:  102:int main() {
+        -:  103:
+        -:  104:   // set players and seed
+        1:  105:   int numOfPlayers = 2;
+        1:  106:   int seed = 232;
+        -:  107:
+        -:  108:   // declare game state
+        -:  109:   struct gameState G, testGame;
+        -:  110:
+        -:  111:   // set card array
+        1:  112:   int k[10] = {adventurer, baron, gardens, embargo, village, minion, mine, cutpurse, sea_hag, tribute};
+        -:  113:
+        -:  114:   // initialize game
+        1:  115:   initializeGame(numOfPlayers, k, seed, &G);
+        -:  116:
+        1:  117:   int handPos = 0;
+        1:  118:   int bonus = 0;
+        1:  119:   int currPlayer = 0;
+        1:  120:   int choice1 = 0;
+        1:  121:   int choice2 = -1;
+        1:  122:   int choice3 = -1;
+        -:  123:
+        -:  124:
+        -:  125:
+        -:  126:
+        -:  127:   // begin testing
+        1:  128:   printf("\n\n** BEGIN TEST No. 1 *************************************************************\n");
+        1:  129:   printf("** choice1 = 0, gain an estate, +1 buy\n");
+        1:  130:   printf("** supply decreases by 1 and discards increase by 1 (for new estate), buys increases by 1 \n\n\n");
+        -:  131:
+        -:  132:   // copy game state for test game
+        1:  133:   memcpy(&testGame, &G, sizeof(struct gameState));
+        -:  134:
+        -:  135: 
+        -:  136:   // Players Hand
+        1:  137:   printf("Players Hand Before Play:\n");
+        1:  138:    int handCount = testGame.handCount[currPlayer];
+        -:  139:    int handIndex;
+        1:  140:    printf("Player %d's hand:\n", currPlayer);
+        1:  141:    if(handCount > 0) printf("#  Card\n");
+        6:  142:    for(handIndex = 0; handIndex < handCount; handIndex++) {
+        5:  143:        int card = testGame.hand[currPlayer][handIndex];
+        -:  144:        char name[32];
+        5:  145:        cardNumToName(card, name);
+        5:  146:        printf("%-2d %-13s\n", handIndex, name);
+        -:  147:    }
+        1:  148:    printf("\n");
+        -:  149:
+        -:  150:
+        1:  151:   choice1 = 0;
+        1:  152:   cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
+        -:  153:
+        -:  154:
+        1:  155:   if (testGame.supplyCount[estate] == G.supplyCount[estate] - 1) {
+    #####:  156:      printf("OK:  the number of Estates in the supply is one less than before playing baron.\n");
+    #####:  157:      printf("Number of estates in supply before play = %d\n", G.supplyCount[estate]);
+    #####:  158:      printf("Number of estates in supply after play = %d,  ", testGame.supplyCount[estate]);
+    #####:  159:      printf("Number of estates in supply expected = %d\n\n", G.supplyCount[estate] -1);
+        -:  160:   }
+        -:  161:
+        -:  162:   else {
+        1:  163:      printf("ERROR:  the number of Estates in the supply is not one less than before playing baron.\n");
+        1:  164:      printf("Number of estates in supply before play = %d\n", G.supplyCount[estate]);
+        1:  165:      printf("Number of estates in supply after play = %d,  ", testGame.supplyCount[estate]);
+        1:  166:      printf("Number of estates in supply expected = %d\n\n", G.supplyCount[estate] -1);
+        -:  167:
+        -:  168:   }
+        -:  169:
+        1:  170:   if (testGame.discardCount[currPlayer] == G.discardCount[currPlayer] + 1) {
+    #####:  171:      printf("OK:  the number of discards has increased by 1 for gaining an estate.\n");
+    #####:  172:      printf("Number of discards before play = %d\n", G.discardCount[currPlayer]);
+    #####:  173:      printf("Number of discards after play = %d,  ", testGame.discardCount[currPlayer]);
+    #####:  174:      printf("Number of discards expected = 1\n\n");
+    #####:  175:      int card = testGame.discard[currPlayer][0];
+        -:  176:      char name[32];
+    #####:  177:      cardNumToName(card, name);
+    #####:  178:      printf("Discard is: %-13s \n\n", name);
+        -:  179:   }
+        -:  180:   else {
+        1:  181:      printf("ERROR:  the number of discards did not increase by 1 for gaining an estate.\n");
+        1:  182:      printf("Number of discards before play = %d\n", G.discardCount[currPlayer]);
+        1:  183:      printf("Number of discards after play = %d,  ", testGame.discardCount[currPlayer]);
+        1:  184:      printf("Number of discards expected = 1\n\n");
+        -:  185:   }
+        -:  186: 
+        1:  187:   if (G.numBuys + 1 == testGame.numBuys) {
+        1:  188:      printf("OK:  the number of buys has increased by 1.\n");
+        1:  189:      printf("Number of buys before play = %d\n", G.numBuys);
+        1:  190:      printf("Number of buys after play = %d,  ", testGame.numBuys);
+        1:  191:      printf("Number of buys expected = %d\n\n", G.numBuys + 1);
+        -:  192:   }
+        -:  193:   else {
+    #####:  194:      printf("ERROR:  the number of buys did not increase by 1.\n");
+    #####:  195:      printf("Number of buys before play = %d\n", G.numBuys);
+    #####:  196:      printf("Number of buys after play = %d,  ", testGame.numBuys);
+    #####:  197:      printf("Number of buys expected = %d\n\n", G.numBuys + 1);
+        -:  198:   }
+        -:  199:
+        -:  200:
+        -:  201:   // Players Hand
+        1:  202:   printf("Players Hand After Play:\n");
+        1:  203:   handCount = testGame.handCount[currPlayer];
+        1:  204:   printf("Player %d's hand:\n", currPlayer);
+        1:  205:   if(handCount > 0) printf("#  Card\n");
+        5:  206:   for(handIndex = 0; handIndex < handCount; handIndex++) {
+        4:  207:      int card = testGame.hand[currPlayer][handIndex];
+        -:  208:      char name[32];
+        4:  209:      cardNumToName(card, name);
+        4:  210:      printf("%-2d %-13s\n", handIndex, name);
+        -:  211:   }
+        1:  212:   printf("\n\n");
+        -:  213:
+        -:  214:
+        1:  215:   printf("** END TEST No. 1 *************************************************************\n\n\n\n");
+        -:  216:
+        -:  217:
+        -:  218:
+        1:  219:   printf("\n\n** BEGIN TEST No. 2 *************************************************************\n");
+        1:  220:   printf("** choice1 = 1, +1 buy, discard estate and gain +4 coins\n");
+        1:  221:   printf("** discards increase by 1, buys increase by 1, coins increase by 4 \n\n\n");
+        -:  222:
+        -:  223:   // copy game state for test game
+        1:  224:   memcpy(&testGame, &G, sizeof(struct gameState));
+        -:  225:
+        -:  226:
+        -:  227:   // Players Hand
+        1:  228:   printf("Players Hand Before Play:\n");
+        1:  229:   handCount = testGame.handCount[currPlayer];
+        1:  230:   printf("Player %d's hand:\n", currPlayer);
+        1:  231:   if(handCount > 0) printf("#  Card\n");
+        6:  232:   for(handIndex = 0; handIndex < handCount; handIndex++) {
+        5:  233:      int card = testGame.hand[currPlayer][handIndex];
+        -:  234:      char name[32];
+        5:  235:      cardNumToName(card, name);
+        5:  236:      printf("%-2d %-13s\n", handIndex, name);
+        -:  237:   }
+        1:  238:   printf("\n");
+        -:  239:
+        -:  240:
+        -:  241:
+        1:  242:   choice1 = 1;
+        1:  243:   cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
+        -:  244:   
+        1:  245:   if (G.numBuys + 1 == testGame.numBuys) {
+        1:  246:      printf("OK:  the number of buys has increased by 1.\n");
+        1:  247:      printf("Number of buys before play = %d\n", G.numBuys);
+        1:  248:      printf("Number of buys after play = %d,  ", testGame.numBuys);
+        1:  249:      printf("Number of buys expected = %d\n\n", G.numBuys + 1);
+        -:  250:   }
+        -:  251:   else {
+    #####:  252:      printf("ERROR:  the number of buys did not increase by 1.\n");
+    #####:  253:      printf("Number of buys before play = %d\n", G.numBuys);
+    #####:  254:      printf("Number of buys after play = %d,  ", testGame.numBuys);
+    #####:  255:      printf("Number of buys expected = %d\n\n", G.numBuys + 1);
+        -:  256:   }
+        -:  257:
+        -:  258:
+        1:  259:   if (testGame.discardCount[currPlayer] == G.discardCount[currPlayer] + 1) {
+    #####:  260:      printf("OK:  the number of discards has increased by 1 for discarding an estate.\n");
+    #####:  261:      printf("Number of discards before play = %d\n", G.discardCount[currPlayer]);
+    #####:  262:      printf("Number of discards after play = %d,  ", testGame.discardCount[currPlayer]);
+    #####:  263:      printf("Number of discards expected = 1\n\n");
+    #####:  264:      int card = testGame.discard[currPlayer][0];
+        -:  265:      char name[32];
+    #####:  266:      cardNumToName(card, name);
+    #####:  267:      printf("Discard is: %-13s \n\n", name);
+        -:  268:   }
+        -:  269:   else {
+        1:  270:      printf("ERROR:  the number of discards did not increase by 1 for discarding an estate.\n");
+        1:  271:      printf("Number of discards before play = %d\n", G.discardCount[currPlayer]);
+        1:  272:      printf("Number of discards after play = %d,  ", testGame.discardCount[currPlayer]);
+        1:  273:      printf("Number of discards expected = 1\n\n");
+        -:  274:   }
+        -:  275:
+        -:  276:
+        1:  277:   if (G.coins + 4 == testGame.coins) {
+        1:  278:      printf("OK:  the number of coins has increased by 4.\n");
+        1:  279:      printf("Number of coins before play = %d\n", G.coins);
+        1:  280:      printf("Number of coins after play = %d,  ", testGame.coins);
+        1:  281:      printf("Number of coins expected = %d\n\n", G.coins + 4);
+        -:  282:   }
+        -:  283:   else {
+    #####:  284:      printf("ERROR:  the number of coins did not increase by 4.\n");
+    #####:  285:      printf("Number of coins before play = %d\n", G.coins);
+    #####:  286:      printf("Number of coins after play = %d,  ", testGame.coins);
+    #####:  287:      printf("Number of coins expected = %d\n\n", G.coins + 4);
+        -:  288:   }
+        -:  289:
+        -:  290:
+        -:  291:   // Players Hand
+        1:  292:   printf("Players Hand After Play:\n");
+        1:  293:   handCount = testGame.handCount[currPlayer];
+        1:  294:   printf("Player %d's hand:\n", currPlayer);
+        1:  295:   if(handCount > 0) printf("#  Card\n");
+        5:  296:   for(handIndex = 0; handIndex < handCount; handIndex++) {
+        4:  297:      int card = testGame.hand[currPlayer][handIndex];
+        -:  298:      char name[32];
+        4:  299:      cardNumToName(card, name);
+        4:  300:      printf("%-2d %-13s\n", handIndex, name);
+        -:  301:   }
+        1:  302:   printf("\n\n");
+        -:  303:
+        -:  304:
+        -:  305:
+        1:  306:   printf("** END TEST No. 2 *************************************************************\n\n\n\n");
+        -:  307:
+        -:  308:
+        -:  309:
+        -:  310:
+        -:  311:   // begin testing
+        1:  312:   printf("\n\n** BEGIN TEST No. 3 *************************************************************\n");
+        1:  313:   printf("** choice1 = -1, gain an estate, +1 buy\n");
+        1:  314:   printf("** supply decreases by 1 and discards increase by 1 (for new estate), buys increases by 1 \n\n\n");
+        -:  315:
+        -:  316:   // copy game state for test game
+        1:  317:   memcpy(&testGame, &G, sizeof(struct gameState));
+        -:  318:
+        -:  319: 
+        -:  320:   // Players Hand
+        1:  321:   printf("Players Hand Before Play:\n");
+        1:  322:    handCount = testGame.handCount[currPlayer];
+        1:  323:    printf("Player %d's hand:\n", currPlayer);
+        1:  324:    if(handCount > 0) printf("#  Card\n");
+        6:  325:    for(handIndex = 0; handIndex < handCount; handIndex++) {
+        5:  326:        int card = testGame.hand[currPlayer][handIndex];
+        -:  327:        char name[32];
+        5:  328:        cardNumToName(card, name);
+        5:  329:        printf("%-2d %-13s\n", handIndex, name);
+        -:  330:    }
+        1:  331:    printf("\n");
+        -:  332:
+        -:  333:
+        1:  334:   choice1 = -1;
+        1:  335:   cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
+        -:  336:
+        -:  337:
+        1:  338:   if (testGame.supplyCount[estate] == G.supplyCount[estate] - 1) {
+    #####:  339:      printf("OK:  the number of Estates in the supply is one less than before playing baron.\n");
+    #####:  340:      printf("Number of estates in supply before play = %d\n", G.supplyCount[estate]);
+    #####:  341:      printf("Number of estates in supply after play = %d,  ", testGame.supplyCount[estate]);
+    #####:  342:      printf("Number of estates in supply expected = %d\n\n", G.supplyCount[estate] -1);
+        -:  343:   }
+        -:  344:
+        -:  345:   else {
+        1:  346:      printf("ERROR:  the number of Estates in the supply is not one less than before playing baron.\n");
+        1:  347:      printf("Number of estates in supply before play = %d\n", G.supplyCount[estate]);
+        1:  348:      printf("Number of estates in supply after play = %d,  ", testGame.supplyCount[estate]);
+        1:  349:      printf("Number of estates in supply expected = %d\n\n", G.supplyCount[estate] -1);
+        -:  350:
+        -:  351:   }
+        -:  352:
+        1:  353:   if (testGame.discardCount[currPlayer] == G.discardCount[currPlayer] + 1) {
+        1:  354:      printf("OK:  the number of discards has increased by 1 for gaining an estate.\n");
+        1:  355:      printf("Number of discards before play = %d\n", G.discardCount[currPlayer]);
+        1:  356:      printf("Number of discards after play = %d,  ", testGame.discardCount[currPlayer]);
+        1:  357:      printf("Number of discards expected = 1\n");
+        1:  358:      int card = testGame.discard[currPlayer][0];
+        -:  359:      char name[32];
+        1:  360:      cardNumToName(card, name);
+        1:  361:      printf("Discard is: %-13s \n\n", name);
+        -:  362:   }
+        -:  363:   else {
+    #####:  364:      printf("ERROR:  the number of discards did not increase by 1 for gaining an estate.\n");
+    #####:  365:      printf("Number of discards before play = %d\n", G.discardCount[currPlayer]);
+    #####:  366:      printf("Number of discards after play = %d,  ", testGame.discardCount[currPlayer]);
+    #####:  367:      printf("Number of discards expected = 1\n\n");
+        -:  368:   }
+        -:  369: 
+        1:  370:   if (G.numBuys + 1 == testGame.numBuys) {
+        1:  371:      printf("OK:  the number of buys has increased by 1.\n");
+        1:  372:      printf("Number of buys before play = %d\n", G.numBuys);
+        1:  373:      printf("Number of buys after play = %d,  ", testGame.numBuys);
+        1:  374:      printf("Number of buys expected = %d\n\n", G.numBuys + 1);
+        -:  375:   }
+        -:  376:   else {
+    #####:  377:      printf("ERROR:  the number of buys did not increase by 1.\n");
+    #####:  378:      printf("Number of buys before play = %d\n", G.numBuys);
+    #####:  379:      printf("Number of buys after play = %d,  ", testGame.numBuys);
+    #####:  380:      printf("Number of buys expected = %d\n\n", G.numBuys + 1);
+        -:  381:   }
+        -:  382:
+        -:  383:
+        -:  384:   // Players Hand
+        1:  385:   printf("Players Hand After Play:\n");
+        1:  386:   handCount = testGame.handCount[currPlayer];
+        1:  387:   printf("Player %d's hand:\n", currPlayer);
+        1:  388:   if(handCount > 0) printf("#  Card\n");
+        6:  389:   for(handIndex = 0; handIndex < handCount; handIndex++) {
+        5:  390:      int card = testGame.hand[currPlayer][handIndex];
+        -:  391:      char name[32];
+        5:  392:      cardNumToName(card, name);
+        5:  393:      printf("%-2d %-13s\n", handIndex, name);
+        -:  394:   }
+        1:  395:   printf("\n\n");
+        -:  396:
+        -:  397:
+        1:  398:   printf("** END TEST No. 3 *************************************************************\n\n\n\n");
+        -:  399:
+        -:  400: 
+        1:  401:   return 0;	
+        -:  402:}

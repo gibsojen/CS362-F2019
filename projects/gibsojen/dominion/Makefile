@@ -39,7 +39,7 @@ unittestresults: dominion.o
 	echo "unittest1.c:" >> unittestresults.out
 	gcc -o unittest1 -g unittest1.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
 	./unittest1 >> unittestresults.out
-	gcov unittest1.c >> unittestresults.out
+	gcov kingdom_cards.c -f >> unittestresults.out
 
 #	echo "unittest2.c:" >> tests.out
 #	gcc -o unittest2 compare.c bst.c unittest2.c $(CFLAGS)
