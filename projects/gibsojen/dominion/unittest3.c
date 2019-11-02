@@ -115,12 +115,12 @@ int main() {
    initializeGame(numOfPlayers, k, seed, &G);
 
    int handPos = -1;
-   int bonus = 0;
+   //int bonus = 0;
    int currPlayer = 0;
    int nextPlayer = 1;
    int choice1 = 0;
    int choice2 = 0;
-   int choice3 = 0;
+   //int choice3 = 0;
 
 
 
@@ -164,7 +164,8 @@ int main() {
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    int played = testGame.playedCardCount;
 
-   cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
 
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[selectedCard]);
@@ -298,7 +299,8 @@ int main() {
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    played = testGame.playedCardCount;
 
-   cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
 
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[selectedCard]);
@@ -432,7 +434,8 @@ int main() {
 
    played = testGame.playedCardCount;
 
-   cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
 
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[selectedCard]);
@@ -569,7 +572,8 @@ int main() {
 
    played = testGame.playedCardCount;
    
-   cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
 
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[selectedCard]);
@@ -662,7 +666,8 @@ int main() {
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    played = testGame.playedCardCount;
 
-   cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
 
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[selectedCard]);

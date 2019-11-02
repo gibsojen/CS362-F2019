@@ -115,11 +115,11 @@ int main() {
    initializeGame(numOfPlayers, k, seed, &G);
 
    int handPos = -1;
-   int bonus = 0;
+   //int bonus = 0;
    int currPlayer = 0;
    int choice1 = 0;
    int choice2 = 0;
-   int choice3 = 0;
+   //int choice3 = 0;
    int i = 0;
 
 
@@ -151,7 +151,8 @@ int main() {
 
    choice1 = 1;
    choice2 = 0;
-   cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   minionCard (choice1, choice2, &testGame, handPos, currPlayer);
 
 
    if (G.numActions + 1 == testGame.numActions) {
@@ -244,7 +245,8 @@ int main() {
 
    choice1 = 0;
    choice2 = 1;
-   cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   minionCard (choice1, choice2, &testGame, handPos, currPlayer);
 
    
    if (G.numActions + 1 == testGame.numActions) {
@@ -409,7 +411,8 @@ int main() {
    choice2 = 1;
    int played = testGame.playedCardCount;
 
-   cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   minionCard (choice1, choice2, &testGame, handPos, currPlayer);
 
    if (G.handCount[nextPlayer] == 5 && testGame.handCount[nextPlayer] == 4) {
       printf("OK:  the next player had 5 cards, and now they have 4.\n");

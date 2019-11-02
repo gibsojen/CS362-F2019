@@ -114,12 +114,12 @@ int main() {
    // initialize game
    initializeGame(numOfPlayers, k, seed, &G);
 
-   int handPos = 0;
-   int bonus = 0;
+   //int handPos = 0;
+   //int bonus = 0;
    int currPlayer = 0;
    int choice1 = 0;
-   int choice2 = -1;
-   int choice3 = -1;
+   //int choice2 = -1;
+   //int choice3 = -1;
 
 
 
@@ -149,7 +149,8 @@ int main() {
 
 
    choice1 = 0;
-   cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   //cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   baronCard (choice1, &testGame, currPlayer);
 
 
    if (testGame.supplyCount[estate] == G.supplyCount[estate] - 1) {
@@ -240,7 +241,8 @@ int main() {
 
 
    choice1 = 1;
-   cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   //cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   baronCard (choice1, &testGame, currPlayer);
    
    if (G.numBuys + 1 == testGame.numBuys) {
       printf("OK:  the number of buys has increased by 1.\n");
@@ -332,7 +334,8 @@ int main() {
 
 
    choice1 = -1;
-   cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   //cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   baronCard (choice1, &testGame, currPlayer);
 
 
    if (testGame.supplyCount[estate] == G.supplyCount[estate] - 1) {
@@ -429,7 +432,8 @@ int main() {
     printf("\n");
 
    choice1 = 0;
-   cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   //cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   baronCard (choice1, &testGame, currPlayer);
 
 
    if (G.numBuys + 1 == testGame.numBuys) {

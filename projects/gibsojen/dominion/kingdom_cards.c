@@ -19,23 +19,6 @@ int remEstateSupply (struct gameState *state) {
 
 
 
-// for testing only
-/*
-int smithyCard (int card, int choice1, struct gameState *state, int handPos, int *bonus,
-     	       int currentPlayer) {
-	int i;
-        //+3 Cards
-        for (i = 0; i < 3; i++)
-        {
-            drawCard(currentPlayer, state);
-        }
-
-        //discard card from hand
-        discardCard(handPos, currentPlayer, state, 0);
-        return 0;
-}
-*/
-
 int baronCard (int choice1, struct gameState *state, int currentPlayer) {
 
 	state->numBuys++;//Increase buys by 1!
