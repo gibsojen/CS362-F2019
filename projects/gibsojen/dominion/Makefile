@@ -48,10 +48,12 @@ unittestresults: dominion.o
 	./unittest2 >> unittestresults.out
 	gcov kingdom_cards.c -f -b >> unittestresults.out
 	
-#	echo "unittest3.c:" >> tests.out
-#	gcc -o unittest3 compare.c bst.c unittest3.c $(CFLAGS)
-#	./unittest3 >> tests.out
-#	gcov bst.c >> tests.out
+	echo "------------------------------------------------------------------------------------------" >> unittestresults.out
+	echo "Result for running Unit 3 tests:" >> unittestresults.out
+	echo "unittest3.c:" >> unittestresults.out
+	gcc -o unittest3 -g unittest3.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
+	./unittest3 >> unittestresults.out
+	gcov kingdom_cards.c -f -b >> unittestresults.out
 	
 #	echo "unittest4.c:" >> tests.out
 #	gcc -o unittest4 compare.c bst.c unittest4.c $(CFLAGS)
