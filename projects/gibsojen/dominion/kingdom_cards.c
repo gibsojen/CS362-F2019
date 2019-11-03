@@ -234,11 +234,14 @@ int tributeCard (struct gameState *state, int currentPlayer) {
                 shuffle(nextPlayer,state);//Shuffle the deck
             }
             tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
-            state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;
+            state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;  // -- is a bug
             state->deckCount[nextPlayer]--;
             tributeRevealedCards[1] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
-            state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;
+            state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;  // -- is a bug
             state->deckCount[nextPlayer]--;
+
+            //printf("reveal0:  %d\n", tributeRevealedCards[0]);
+            //printf("reveal1:  %d\n", tributeRevealedCards[1]);
         }
 
         if (tributeRevealedCards[0] == tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
@@ -247,7 +250,7 @@ int tributeCard (struct gameState *state, int currentPlayer) {
             tributeRevealedCards[1] = -1;
         }
 
-        for (i = 0; i <= 2; i ++) {
+        for (i = 0; i <= 2; i ++) {  //this is a bug, should only be <
             if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
                 state->coins += 2;
             }
@@ -261,6 +264,7 @@ int tributeCard (struct gameState *state, int currentPlayer) {
             }
         }
 
+        
         return 0;
 
 
