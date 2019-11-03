@@ -284,7 +284,7 @@ int mineCard (int choice1, int choice2, struct gameState *state, int handPos, in
             return -1;
         }
 
-        if (choice2 < treasure_map || choice2 > curse) // intro bug.  changed from choice2 > treasure_map || choice2 < curse to what's shown
+        if (choice2 > treasure_map || choice2 < curse) // intro bug.  changed from choice2 > treasure_map || choice2 < curse to what's shown
         {
             return -1;
         }
@@ -295,6 +295,7 @@ int mineCard (int choice1, int choice2, struct gameState *state, int handPos, in
         }
 
         gainCard(choice2, state, 2, currentPlayer);
+        //printf("hand count in mind: %d\n\n", state->handCount[currentPlayer]);
 
         //discard card from hand
         discardCard(handPos, currentPlayer, state, 0);

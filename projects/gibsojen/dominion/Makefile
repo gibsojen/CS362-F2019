@@ -62,10 +62,12 @@ unittestresults: dominion.o
 	./unittest4 >> unittestresults.out
 	gcov kingdom_cards.c -f -b >> unittestresults.out
 	
-#	echo "unittest5.c:" >> tests.out
-#	gcc -o unittest5 compare.c bst.c unittest5.c $(CFLAGS)
-#	./unittest5 >> tests.out
-#	gcov bst.c >> tests.out
+	echo "------------------------------------------------------------------------------------------" >> unittestresults.out
+	echo "Result for running Unit 5 tests:" >> unittestresults.out
+	echo "unittest5.c:" >> unittestresults.out
+	gcc -o unittest5 -g unittest5.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
+	./unittest5 >> unittestresults.out
+	gcov kingdom_cards.c -f -b >> unittestresults.out
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unittest1
