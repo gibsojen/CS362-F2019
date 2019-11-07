@@ -397,7 +397,6 @@ int main() {
       printf("Number of estates in supply before play = %d\n", G.supplyCount[estate]);
       printf("Number of estates in supply after play = %d,  ", testGame.supplyCount[estate]);
       printf("Number of estates in supply expected = %d\n\n", G.supplyCount[estate] -1);
-
    }
 
    if (testGame.discardCount[currPlayer] == G.discardCount[currPlayer] + 1) {
@@ -452,8 +451,9 @@ int main() {
 
    // begin testing
    printf("\n\n** BEGIN TEST No. 4 *************************************************************\n");
-   printf("** choice1 = 0, gain an estate, +1 buy\n");
-   printf("** supply decreases by 1 and discards increase by 1 (for new estate), buys increases by 1 \n\n\n");
+   printf("** choice1 = 1, wants discard an estate but doesn't have one\n");
+   printf("** so instead, will gain an estate in discards, +1 buy\n");
+   printf("** supply should decrease by 1, discards increase by 1, buys increases by 1, coins stay the same\n\n\n");
 
    G.hand[currPlayer][0] = copper;
    G.hand[currPlayer][1] = copper;
@@ -478,7 +478,7 @@ int main() {
     }
     printf("\n");
 
-   choice1 = 0;
+   choice1 = 1;
    //cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
    retError = baronCard (choice1, &testGame, currPlayer);
 
@@ -487,6 +487,20 @@ int main() {
    }
    else if (retError == -1) {
       printf("ERROR:  the return code of baron was -1.\n\n");
+   }
+
+   if (testGame.supplyCount[estate] == G.supplyCount[estate] - 1) {
+      printf("OK:  the number of Estates in the supply is one less than before playing baron.\n");
+      printf("Number of estates in supply before play = %d\n", G.supplyCount[estate]);
+      printf("Number of estates in supply after play = %d,  ", testGame.supplyCount[estate]);
+      printf("Number of estates in supply expected = %d\n\n", G.supplyCount[estate] -1);
+   }
+
+   else {
+      printf("ERROR:  the number of Estates in the supply is not one less than before playing baron.\n");
+      printf("Number of estates in supply before play = %d\n", G.supplyCount[estate]);
+      printf("Number of estates in supply after play = %d,  ", testGame.supplyCount[estate]);
+      printf("Number of estates in supply expected = %d\n\n", G.supplyCount[estate] -1);
    }
 
    if (G.numBuys + 1 == testGame.numBuys) {

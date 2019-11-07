@@ -115,11 +115,9 @@ int main() {
    initializeGame(numOfPlayers, k, seed, &G);
 
    int handPos = -1;
-   //int bonus = 0;
    int currPlayer = 0;
    int choice1 = 0;
    int choice2 = 0;
-   //int choice3 = 0;
    int i = 0;
    int retError;
 
@@ -192,7 +190,6 @@ int main() {
    }
 
 
-
    if (testGame.discardCount[currPlayer] == G.discardCount[currPlayer]) {
       printf("OK:  the number of discards is 0.\n");
       printf("Number of discards before play = %d\n", G.discardCount[currPlayer]);
@@ -205,7 +202,21 @@ int main() {
       printf("Number of discards after play = %d,  ", testGame.discardCount[currPlayer]);
       printf("Number of discards expected = 0\n\n");
    }
-   printf("# of played cards:  %d\n", testGame.playedCardCount); 
+  
+
+   if (testGame.handCount[currPlayer] == G.handCount[currPlayer]) {
+      printf("OK:  hand count remained the same.\n");
+      printf("Number of cards in hand before play = %d\n", G.handCount[currPlayer]);
+      printf("Number of cards in hand aftere play = %d,  ", testGame.handCount[currPlayer]);
+      printf("Number of cards in hand expected = %d\n\n", G.handCount[currPlayer]);
+   }
+   else {
+      printf("ERROR:  hand count has changed.\n");
+      printf("Number of cards in hand before play = %d\n", G.handCount[currPlayer]);
+      printf("Number of cards in hand aftere play = %d,  ", testGame.handCount[currPlayer]);
+      printf("Number of cards in hand expected = %d\n\n", G.handCount[currPlayer]);
+   }
+
 
 
    // Players Hand
@@ -524,6 +535,140 @@ int main() {
 
  
    printf("** END TEST No. 3 *************************************************************\n\n\n\n");
+
+
+
+   // begin testing
+   printf("\n\n** BEGIN TEST No. 4 *************************************************************\n");
+   printf("** choice1 = 1, choice2 = 1, +2 coins, +1 action\n");
+   printf("** all options are tested \n");
+   printf("** in this test, check for boundard case \n\n\n");
+
+   // copy game state for test game
+   memcpy(&testGame, &G, sizeof(struct gameState));
+
+ 
+   // Players Hand
+   printf("Players Hand Before Play:\n");
+    handCount = testGame.handCount[currPlayer];
+    printf("Player %d's hand:\n", currPlayer);
+    if(handCount > 0) printf("#  Card\n");
+    for(handIndex = 0; handIndex < handCount; handIndex++) {
+        int card = testGame.hand[currPlayer][handIndex];
+        char name[32];
+        cardNumToName(card, name);
+        printf("%-2d %-13s\n", handIndex, name);
+    }
+    printf("\n");
+
+
+   choice1 = 1;
+   choice2 = 1;
+   //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
+   retError = minionCard (choice1, choice2, &testGame, handPos, currPlayer);
+
+
+   if (retError == 0) {
+      printf("OK:  the return code of minion was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of minion was -1.\n\n");
+   }
+
+
+   if (G.numActions + 1 == testGame.numActions) {
+      printf("OK:  the number of actions has increased by 1.\n");
+      printf("Number of actions before play = %d\n", G.numActions);
+      printf("Number of actions after play = %d,  ", testGame.numActions);
+      printf("Number of actions expected = %d\n\n", G.numActions + 1);
+   }
+   else {
+      printf("ERROR:  the number of actions did not increase by 1.\n");
+      printf("Number of actions before play = %d\n", G.numActions);
+      printf("Number of actions after play = %d,  ", testGame.numActions);
+      printf("Number of actions expected = %d\n\n", G.numActions + 1);
+   }
+
+
+
+   if (G.coins + 2 == testGame.coins) {
+      printf("OK:  the number of coins has increased by 2.\n");
+      printf("Number of coins before play = %d\n", G.coins);
+      printf("Number of coins after play = %d,  ", testGame.coins);
+      printf("Number of coins expected = %d\n\n", G.coins + 2);
+   }
+   else {
+      printf("ERROR:  the number of coins did not increase by 2.\n");
+      printf("Number of coins before play = %d\n", G.coins);
+      printf("Number of coins after play = %d,  ", testGame.coins);
+      printf("Number of coins expected = %d\n\n", G.coins + 2);
+   }
+
+
+
+   if (testGame.discardCount[currPlayer] == G.discardCount[currPlayer]) {
+      printf("OK:  the number of discards remained the same.\n");
+      printf("Number of discards before play = %d\n", G.discardCount[currPlayer]);
+      printf("Number of discards after play = %d,  ", testGame.discardCount[currPlayer]);
+      printf("Number of discards expected = %d\n\n", G.discardCount[currPlayer]);
+   }
+   else {
+      printf("ERROR:  the number of discards did not remain the same.\n");
+      printf("Number of discards before play = %d\n", G.discardCount[currPlayer]);
+      printf("Number of discards after play = %d,  ", testGame.discardCount[currPlayer]);
+      printf("Number of discards expected = %d\n\n", G.discardCount[currPlayer]);
+
+      
+      if (testGame.playedCardCount > G.playedCardCount) {
+         printf("Instead of being discarded, the cards are in played cards.\n");
+         printf("Number of played cards before play = %d\n", G.playedCardCount);
+         printf("Number of played cards after play = %d\n", testGame.playedCardCount);
+         printf("These are the cards in played cards:\n");
+         for (i = 0; i < testGame.playedCardCount; i++) {
+            int card = testGame.playedCards[i];
+            char name[32];
+            cardNumToName(card, name);
+            printf("Played Card #%d is: %-13s \n", i, name);
+         }
+         printf("\n\n");
+      }
+   }
+
+
+   if (testGame.handCount[currPlayer] == G.handCount[currPlayer]) {
+      printf("OK:  the number of cards in hand remained the same.\n");
+      printf("Number of cards in hand before play = %d\n", G.handCount[currPlayer]);
+      printf("Number of cards in hand after play = %d,  ", testGame.handCount[currPlayer]);
+      printf("Number of cards in hand expected = %d\n\n", G.handCount[currPlayer]);
+   } 
+   else {
+      printf("ERROR:  the number of cards in hand did not remain the same.\n");
+      printf("Number of cards in hand before play = %d\n", G.handCount[currPlayer]);
+      printf("Number of cards in hand after play = %d,  ", testGame.handCount[currPlayer]);
+      printf("Number of cards in hand expected = %d\n\n", G.handCount[currPlayer]);
+   }
+
+
+
+   // Players Hand
+   printf("Players Hand After Play:\n");
+   handCount = testGame.handCount[currPlayer];
+   printf("Player %d's hand:\n", currPlayer);
+   if(handCount > 0) printf("#  Card\n");
+   for(handIndex = 0; handIndex < handCount; handIndex++) {
+      int card = testGame.hand[currPlayer][handIndex];
+      char name[32];
+      cardNumToName(card, name);
+      printf("%-2d %-13s\n", handIndex, name);
+   }
+   printf("\n\n");
+
+
+   printf("** END TEST No. 4 *************************************************************\n\n\n\n");
+
+
+
+
    
 
    return 0;	
