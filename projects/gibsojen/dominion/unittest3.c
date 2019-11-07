@@ -121,7 +121,7 @@ int main() {
    int choice1 = 0;
    int choice2 = 0;
    //int choice3 = 0;
-
+   int retError;
 
 
    // begin testing
@@ -165,11 +165,19 @@ int main() {
    int played = testGame.playedCardCount;
 
    //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
 
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[copper]);
+
+
+   if (retError == 0) {
+      printf("OK:  the return code of ambassador was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of ambassador was -1.\n\n");
+   }
 
 
    if (G.handCount[currPlayer] - choice2 == testGame.handCount[currPlayer]) {
@@ -300,12 +308,20 @@ int main() {
    played = testGame.playedCardCount;
 
    //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
 
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[copper]);
 
+
+
+   if (retError == 0) {
+      printf("OK:  the return code of ambassador was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of ambassador was -1.\n\n");
+   }
 
    if (G.handCount[currPlayer] - choice2 == testGame.handCount[currPlayer]) {
       printf("OK:  the hand count is decreased by %d.\n", choice2);
@@ -435,11 +451,19 @@ int main() {
    played = testGame.playedCardCount;
 
    //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
 
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[copper]);
+
+
+   if (retError == 0) {
+      printf("OK:  the return code of ambassador was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of ambassador was -1.\n\n");
+   }
 
 
    if (G.handCount[currPlayer] - choice2 == testGame.handCount[currPlayer]) {
@@ -573,12 +597,18 @@ int main() {
    played = testGame.playedCardCount;
    
    //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
 
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[copper]);
 
+   if (retError == 0) {
+      printf("OK:  the return code of ambassador was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of ambassador was -1.\n\n");
+   }
 
    if (G.handCount[currPlayer] == testGame.handCount[currPlayer]) {
       printf("OK:  the hand count was not decreased because you can't return more than 2.\n");
@@ -667,11 +697,19 @@ int main() {
    played = testGame.playedCardCount;
 
    //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = ambassadorCard (choice1, choice2, &testGame, handPos, currPlayer);
 
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[copper]);
+
+
+   if (retError == 0) {
+      printf("OK:  the return code of ambassador was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of ambassador was -1.\n\n");
+   }
 
 
    if (G.handCount[currPlayer] == testGame.handCount[currPlayer]) {

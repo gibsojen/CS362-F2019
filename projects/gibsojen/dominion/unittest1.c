@@ -120,7 +120,7 @@ int main() {
    int choice1 = 0;
    //int choice2 = -1;
    //int choice3 = -1;
-
+   int retError;
 
 
 
@@ -150,8 +150,14 @@ int main() {
 
    choice1 = 0;
    //cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   baronCard (choice1, &testGame, currPlayer);
+   retError = baronCard (choice1, &testGame, currPlayer);
 
+   if (retError == 0) {
+      printf("OK:  the return code of baron was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of baron was -1.\n\n");
+   }
 
    if (testGame.supplyCount[estate] == G.supplyCount[estate] - 1) {
       printf("OK:  the number of Estates in the supply is one less than before playing baron.\n");
@@ -198,6 +204,18 @@ int main() {
       printf("Number of buys expected = %d\n\n", G.numBuys + 1);
    }
 
+   if (G.coins == testGame.coins) {
+      printf("OK:  the number of coins remains the same.\n");
+      printf("Number of coins before play = %d\n", G.coins);
+      printf("Number of coins after play = %d,  ", testGame.coins);
+      printf("Number of coins expected = %d\n\n", G.coins);
+   }
+   else {
+      printf("ERROR:  the number of coins changed.\n");
+      printf("Number of coins before play = %d\n", G.coins);
+      printf("Number of coins after play = %d,  ", testGame.coins);
+      printf("Number of coins expected = %d\n\n", G.coins);
+   }
 
    // Players Hand
    printf("Players Hand After Play:\n");
@@ -242,8 +260,15 @@ int main() {
 
    choice1 = 1;
    //cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   baronCard (choice1, &testGame, currPlayer);
+   retError = baronCard (choice1, &testGame, currPlayer);
    
+   if (retError == 0) {
+      printf("OK:  the return code of baron was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of baron was -1.\n\n");
+   }
+
    if (G.numBuys + 1 == testGame.numBuys) {
       printf("OK:  the number of buys has increased by 1.\n");
       printf("Number of buys before play = %d\n", G.numBuys);
@@ -290,6 +315,21 @@ int main() {
    }
 
 
+
+   if (testGame.supplyCount[estate] == G.supplyCount[estate]) {
+      printf("OK:  the number of Estates in the supply has not changed.\n");
+      printf("Number of estates in supply before play = %d\n", G.supplyCount[estate]);
+      printf("Number of estates in supply after play = %d,  ", testGame.supplyCount[estate]);
+      printf("Number of estates in supply expected = %d\n\n", G.supplyCount[estate]);
+   }
+
+   else {
+      printf("ERROR:  the number of Estates in the supply has changed.\n");
+      printf("Number of estates in supply before play = %d\n", G.supplyCount[estate]);
+      printf("Number of estates in supply after play = %d,  ", testGame.supplyCount[estate]);
+      printf("Number of estates in supply expected = %d\n\n", G.supplyCount[estate]);
+   }
+
    // Players Hand
    printf("Players Hand After Play:\n");
    handCount = testGame.handCount[currPlayer];
@@ -335,8 +375,15 @@ int main() {
 
    choice1 = -1;
    //cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   baronCard (choice1, &testGame, currPlayer);
+   retError = baronCard (choice1, &testGame, currPlayer);
 
+
+   if (retError == 0) {
+      printf("OK:  the return code of baron was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of baron was -1.\n\n");
+   }
 
    if (testGame.supplyCount[estate] == G.supplyCount[estate] - 1) {
       printf("OK:  the number of Estates in the supply is one less than before playing baron.\n");
@@ -433,8 +480,14 @@ int main() {
 
    choice1 = 0;
    //cardEffect(baron, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   baronCard (choice1, &testGame, currPlayer);
+   retError = baronCard (choice1, &testGame, currPlayer);
 
+   if (retError == 0) {
+      printf("OK:  the return code of baron was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of baron was -1.\n\n");
+   }
 
    if (G.numBuys + 1 == testGame.numBuys) {
       printf("OK:  the number of buys has increased by 1.\n");

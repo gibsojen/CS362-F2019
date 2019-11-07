@@ -29,7 +29,7 @@ int baronCard (int choice1, struct gameState *state, int currentPlayer) {
                 if (state->hand[currentPlayer][p] == estate) { //Found an estate card!
                     state->coins += 4;//Add 4 coins to the amount of coins
                     state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];
-                    //state->discardCount[currentPlayer]++;  introduced bug by removing this line
+                    //state->discardCount[currentPlayer]++;  //introduced bug by removing this line
                     for (; p < state->handCount[currentPlayer]; p++) {
                         state->hand[currentPlayer][p] = state->hand[currentPlayer][p+1];
                     }

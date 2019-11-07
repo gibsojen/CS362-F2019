@@ -121,7 +121,7 @@ int main() {
    int choice2 = 0;
    //int choice3 = 0;
    int i = 0;
-
+   int retError;
 
 
    // begin testing
@@ -152,7 +152,15 @@ int main() {
    choice1 = 1;
    choice2 = 0;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   minionCard (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = minionCard (choice1, choice2, &testGame, handPos, currPlayer);
+
+
+   if (retError == 0) {
+      printf("OK:  the return code of minion was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of minion was -1.\n\n");
+   }
 
 
    if (G.numActions + 1 == testGame.numActions) {
@@ -246,9 +254,16 @@ int main() {
    choice1 = 0;
    choice2 = 1;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   minionCard (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = minionCard (choice1, choice2, &testGame, handPos, currPlayer);
 
    
+   if (retError == 0) {
+      printf("OK:  the return code of minion was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of minion was -1.\n\n");
+   }
+
    if (G.numActions + 1 == testGame.numActions) {
       printf("OK:  the number of actions has increased by 1.\n");
       printf("Number of actions before play = %d\n", G.numActions);
@@ -412,7 +427,16 @@ int main() {
    int played = testGame.playedCardCount;
 
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   minionCard (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = minionCard (choice1, choice2, &testGame, handPos, currPlayer);
+
+
+   if (retError == 0) {
+      printf("OK:  the return code of minion was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of minion was -1.\n\n");
+   }
+
 
    if (G.handCount[nextPlayer] == 5 && testGame.handCount[nextPlayer] == 4) {
       printf("OK:  the next player had 5 cards, and now they have 4.\n");

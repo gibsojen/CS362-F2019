@@ -121,7 +121,7 @@ int main() {
    //int choice1 = 0;
    //int choice2 = 0;
    //int choice3 = 0;
-
+   int retError;
 
 
    // begin testing
@@ -182,8 +182,15 @@ int main() {
    }
    printf("\n");
 
-   tributeCard (&testGame, currPlayer);
+   retError = tributeCard (&testGame, currPlayer);
 
+
+   if (retError == 0) {
+      printf("OK:  the return code of tribute was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of tribute was -1.\n\n");
+   }
 
    if (G.deckCount[nextPlayer] - 2 == testGame.deckCount[nextPlayer]) {
       printf("OK:  the deck count of next player has decreased by 2.\n");
@@ -361,7 +368,14 @@ int main() {
    }
    printf("\n");
 
-   tributeCard (&testGame, currPlayer);
+   retError = tributeCard (&testGame, currPlayer);
+
+   if (retError == 0) {
+      printf("OK:  the return code of tribute was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of tribute was -1.\n\n");
+   }
 
 
    if (G.deckCount[nextPlayer] - 2 == testGame.deckCount[nextPlayer]) {
@@ -533,8 +547,15 @@ int main() {
    }
    printf("\n");
 
-   tributeCard (&testGame, currPlayer);
+   retError = tributeCard (&testGame, currPlayer);
 
+
+   if (retError == 0) {
+      printf("OK:  the return code of tribute was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of tribute was -1.\n\n");
+   }
 
    if (G.deckCount[nextPlayer] - 2 == testGame.deckCount[nextPlayer]) {
       printf("OK:  the deck count of next player has decreased by 2.\n");
@@ -694,8 +715,15 @@ int main() {
    }
    printf("\n");
 
-   tributeCard (&testGame, currPlayer);
+   retError = tributeCard (&testGame, currPlayer);
 
+
+   if (retError == 0) {
+      printf("OK:  the return code of tribute was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of tribute was -1.\n\n");
+   }
 
    if (G.deckCount[nextPlayer] - 1 == testGame.deckCount[nextPlayer]) {
       printf("OK:  the deck count of next player has decreased by 1.\n");
@@ -876,8 +904,15 @@ int main() {
 
 
 
-   tributeCard (&testGame, currPlayer);
+   retError = tributeCard (&testGame, currPlayer);
 
+
+   if (retError == 0) {
+      printf("OK:  the return code of tribute was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of tribute was -1.\n\n");
+   }
 
 
    if (G.discardCount[nextPlayer]  == testGame.discardCount[nextPlayer]) {
@@ -1046,8 +1081,15 @@ int main() {
    }
    printf("\n");
 
-   tributeCard (&testGame, currPlayer);
+   retError = tributeCard (&testGame, currPlayer);
 
+
+   if (retError == 0) {
+      printf("OK:  the return code of tribute was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of tribute was -1.\n\n");
+   }
 
    if (G.deckCount[nextPlayer] - 2 == testGame.deckCount[nextPlayer]) {
       printf("OK:  the deck count of next player has decreased by 2.\n");
@@ -1224,8 +1266,15 @@ int main() {
 
 
 
-   tributeCard (&testGame, currPlayer);
+   retError = tributeCard (&testGame, currPlayer);
 
+
+   if (retError == 0) {
+      printf("OK:  the return code of tribute was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of tribute was -1.\n\n");
+   }
 
 
    if (G.discardCount[nextPlayer]  == testGame.discardCount[nextPlayer]) {
@@ -1409,8 +1458,15 @@ int main() {
 
 
 
-   tributeCard (&testGame, currPlayer);
+   retError = tributeCard (&testGame, currPlayer);
 
+
+   if (retError == 0) {
+      printf("OK:  the return code of tribute was 0.\n\n");
+   }
+   else if (retError == -1) {
+      printf("ERROR:  the return code of tribute was -1.\n\n");
+   }
 
    // should be the same because the cards get moved to the deck and then back to discards
    if (G.discardCount[nextPlayer]  == testGame.discardCount[nextPlayer]) {
