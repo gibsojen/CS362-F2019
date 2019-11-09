@@ -114,12 +114,14 @@ int main() {
    initializeGame(numOfPlayers, k, seed, &G);
 
    int handPos = -1;
-   //int bonus = 0;
    int currPlayer = 0;
    int choice1 = 0;
    int choice2 = 0;
-   //int choice3 = 0;
    int retError;
+   int played = G.playedCardCount;
+   int i;
+   int pos = -1;
+   int found = 0;
 
    // begin testing
    printf("\n\n** BEGIN TEST No. 1 *************************************************************\n");
@@ -210,6 +212,26 @@ int main() {
       printf("Number of discards expected = %d\n\n", G.discardCount[currPlayer] + 1);
    }
 
+   if (testGame.playedCardCount == 0) {
+      printf("OK:  the played card count is 0.\n");
+      printf("Number of played cards before play = %d\n", played);
+      printf("Number of played cards after play = %d,  ", testGame.playedCardCount);
+      printf("Number of played cards expected = %d\n\n", played);
+   }
+   else {
+      printf("ERROR:  the played card count is not 0.\n");
+      printf("Number of played cards before play = %d\n", played);
+      printf("Number of played cards after play = %d,  ", testGame.playedCardCount);
+      printf("Number of played cards expected = %d\n\n", played);
+      int i;
+         for (i = 0; i < testGame.playedCardCount; i++) {
+            int card = testGame.playedCards[i];
+            char name[32];
+            cardNumToName(card, name);
+            printf("Played Card #%d is: %-13s \n", i, name);
+         }
+         printf("\n");
+   }
 
    if (testGame.handCount[currPlayer] == G.handCount[currPlayer]) {
       printf("OK:  the number of card in players hand should remain the same, for exchanging two cards.\n");
@@ -239,25 +261,29 @@ int main() {
       printf("Number in supply expected = %d\n\n", G.supplyCount[choice2] - 1);
    }
 
-   int tempCard1 = G.hand[currPlayer][choice1];
-   char name1[32];
-   cardNumToName(tempCard1, name1);
-   int tempCard2 = testGame.hand[currPlayer][choice1];
-   char name2[32];
-   cardNumToName(tempCard2, name2);
+   pos = -1;
+   found = 0;
+   for (i = 0; i < testGame.handCount[currPlayer]; i++) {
+      int card = testGame.hand[currPlayer][i];
+      if (card == gold) {
+         found = 1;
+         pos = i;
+      }
+   }
 
-   if (testGame.hand[currPlayer][choice1] == choice2) {
-      printf("OK:  %s has been added to hand.\n", name2);
-      printf("Number %d position in hand before play is = %s.\n", choice1, name1);
-      printf("Number %d position in hand after play is = %s,  ", choice1, name2);
-      printf("Number %d position in hand expected is = Gold.\n\n", choice1);
+   if (found) {
+      printf("OK:  Gold was added to hand at position %d.\n\n", pos);
+      if (pos == choice1) {
+         printf("Gold was added to the correct position.\n\n");
+      }
+      else {
+         printf("ERROR:  Gold was added to the wrong hand position.\n\n");
+      }
    }
    else {
-      printf("ERROR:  %s should not have been added to hand.\n", name2);
-      printf("Number %d position in hand before play is = %s.\n", choice1, name1);
-      printf("Number %d position in hand after play is = %s,  ", choice1, name2);
-      printf("Number %d position in hand expected is = Gold.\n\n", choice1);
+      printf("ERROR: Gold was not added to hand.\n");
    }
+
 
    // Players Hand
    printf("Players Hand After Play:\n");
@@ -286,7 +312,7 @@ int main() {
 
 
    G.hand[currPlayer][0] = copper;
-   G.hand[currPlayer][1] = copper;
+   G.hand[currPlayer][1] = mine;
    G.hand[currPlayer][2] = copper;
    G.hand[currPlayer][3] = silver;
    G.hand[currPlayer][4] = silver;
@@ -311,7 +337,7 @@ int main() {
     printf("\n");
 
 
-   handPos = 3;
+   handPos = 1;
    choice1 = 3;
    choice2 = duchy;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
@@ -319,10 +345,10 @@ int main() {
 
 
    if (retError == -1) {
-      printf("OK:  there was a return error in mineCard of -1 because you can't buy duchy with silver.\n\n");
+      printf("ERROR:  there was a return error in mineCard of -1 because you can't buy duchy with silver.\n\n");
    }
    else if (retError == 0) {
-      printf("ERROR:  the return code of mine was 0, however it should be -1 because you can't buy duchy with silver.\n\n");
+      printf("OK:  the return code of mine is 0.\n\n");
    }
 
 
@@ -354,7 +380,6 @@ int main() {
    }
 
 
-
    if (testGame.discardCount[currPlayer] == G.discardCount[currPlayer]) {
       printf("OK:  the number of discards should remain the same\n");
       printf("Number of discards before play = %d\n", G.discardCount[currPlayer]);
@@ -368,6 +393,27 @@ int main() {
       printf("Number of discards expected = %d\n\n", G.discardCount[currPlayer]);
    }
 
+
+   if (testGame.playedCardCount == 0) {
+      printf("OK:  the played card count is 0.\n");
+      printf("Number of played cards before play = %d\n", played);
+      printf("Number of played cards after play = %d,  ", testGame.playedCardCount);
+      printf("Number of played cards expected = %d\n\n", played);
+   }
+   else {
+      printf("ERROR:  the played card count is not 0.\n");
+      printf("Number of played cards before play = %d\n", played);
+      printf("Number of played cards after play = %d,  ", testGame.playedCardCount);
+      printf("Number of played cards expected = %d\n\n", played);
+      int i;
+         for (i = 0; i < testGame.playedCardCount; i++) {
+            int card = testGame.playedCards[i];
+            char name[32];
+            cardNumToName(card, name);
+            printf("Played Card #%d is: %-13s \n", i, name);
+         }
+         printf("\n");
+   }
 
    if (testGame.handCount[currPlayer] == G.handCount[currPlayer]) {
       printf("OK:  the number of card in players hand should remain the same.\n");
@@ -398,23 +444,24 @@ int main() {
    }
 
 
-   tempCard1 = G.hand[currPlayer][choice1];
-   cardNumToName(tempCard1, name1); //silver
-   tempCard2 = testGame.hand[currPlayer][choice1];
-   cardNumToName(tempCard2, name2);  //duchy
+   pos = -1;
+   found = 0;
+   for (i = 0; i < testGame.handCount[currPlayer]; i++) {
+      int card = testGame.hand[currPlayer][i];
+      if (card == duchy) {
+         found = 1;
+         pos = i;
+      }
+   }
 
-   if (testGame.hand[currPlayer][choice1] == G.hand[currPlayer][choice1]) {
-      printf("OK:  Duchy should not have been added to hand.\n");
-      printf("Number %d position in hand before play is = %s.\n", choice1, name1);
-      printf("Number %d position in hand after play is = %s,  ", choice1, name2);
-      printf("Number %d position in hand expected is = %s.\n\n", choice1, name1);
+   if (!found) {
+      printf("OK:  Duchy was not added to hand.\n\n");
    }
    else {
-      printf("ERROR:  %s has been added to hand.\n", name2);
-      printf("Number %d position in hand before play is = %s.\n", choice1, name1);
-      printf("Number %d position in hand after play is = %s,  ", choice1, name2);
-      printf("Number %d position in hand expected is = %s.\n\n", choice1, name1);
+      printf("ERROR: Duchy has been added to hand.\n");
+      printf("Duchy was found in position %d\n\n", pos);
    }
+
 
 
    // Players Hand
@@ -445,7 +492,7 @@ int main() {
    G.hand[currPlayer][0] = copper;
    G.hand[currPlayer][1] = copper;
    G.hand[currPlayer][2] = copper;
-   G.hand[currPlayer][3] = silver;
+   G.hand[currPlayer][3] = mine;
    G.hand[currPlayer][4] = silver;
    G.handCount[currPlayer] = 5;
 
@@ -468,7 +515,7 @@ int main() {
     printf("\n");
 
 
-   handPos = 1;
+   handPos = 3;
    choice1 = 1;
    choice2 = gold;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
@@ -476,10 +523,10 @@ int main() {
 
 
    if (retError == -1) {
-      printf("OK:  there was a return error in mineCard of -1 because you can't buy gold with copper.\n\n");
+      printf("ERROR:  there was a return error in mineCard of -1 because you can't buy gold with copper.\n\n");
    }
    else if (retError == 0) {
-      printf("ERROR:  the return code of mine was 0, however it should be -1 because you can't buy gold with copper.\n\n");
+      printf("OK:  the return code of mine was 0, however it should be -1 because you can't buy gold with copper.\n\n");
    }
 
 
@@ -526,6 +573,26 @@ int main() {
       printf("Number of discards expected = %d\n\n", G.discardCount[currPlayer]);
    }
 
+   if (testGame.playedCardCount == 0) {
+      printf("OK:  the played card count is 0.\n");
+      printf("Number of played cards before play = %d\n", played);
+      printf("Number of played cards after play = %d,  ", testGame.playedCardCount);
+      printf("Number of played cards expected = %d\n\n", played);
+   }
+   else {
+      printf("ERROR:  the played card count is not 0.\n");
+      printf("Number of played cards before play = %d\n", played);
+      printf("Number of played cards after play = %d,  ", testGame.playedCardCount);
+      printf("Number of played cards expected = %d\n\n", played);
+      int i;
+         for (i = 0; i < testGame.playedCardCount; i++) {
+            int card = testGame.playedCards[i];
+            char name[32];
+            cardNumToName(card, name);
+            printf("Played Card #%d is: %-13s \n", i, name);
+         }
+         printf("\n");
+   }
 
    if (testGame.handCount[currPlayer] == G.handCount[currPlayer]) {
       printf("OK:  the number of card in players hand should remain the same.\n");
@@ -555,24 +622,25 @@ int main() {
       printf("Number in supply expected = %d\n\n", G.supplyCount[choice2]);
    }
 
-      tempCard1 = G.hand[currPlayer][choice1];
-      cardNumToName(tempCard1, name1);
-      tempCard2 = testGame.hand[currPlayer][choice1];
-      cardNumToName(tempCard2, name2);
 
+   pos = -1;
+   found = 0;
+   for (i = 0; i < testGame.handCount[currPlayer]; i++) {
+      int card = testGame.hand[currPlayer][i];
+      if (card == gold) {
+         found = 1;
+         pos = i;
+      }
+   }
 
-   if (testGame.hand[currPlayer][choice1] == G.hand[currPlayer][choice1]) {
-      printf("OK:  Gold was not added to hand.\n");
-      printf("Number %d position in hand before play is = %s.\n", choice1, name1);
-      printf("Number %d position in hand after play is = %s,  ", choice1, name2);
-      printf("Number %d position in hand expected is = %s.\n\n", choice1, name1);
+   if (!found) {
+      printf("OK:  Gold was not added to hand.\n\n");
    }
    else {
-      printf("ERROR:  %s has been added to hand.\n", name2);
-      printf("Number %d position in hand before play is = %s.\n", choice1, name1);
-      printf("Number %d position in hand after play is = %s,  ", choice1, name2);
-      printf("Number %d position in hand expected is = %s.\n\n", choice1, name1);
+      printf("ERROR: Gold has been added to hand.\n");
+      printf("Gold was found in position %d\n\n", pos);
    }
+
 
    // Players Hand
    printf("Players Hand After Play:\n");
@@ -600,9 +668,9 @@ int main() {
    printf("** number of actions should stay the same, number of coins should stay the same\n\n\n");
 
 
-   G.hand[currPlayer][0] = copper;
-   G.hand[currPlayer][1] = copper;
-   G.hand[currPlayer][2] = copper;
+   G.hand[currPlayer][0] = minion;
+   G.hand[currPlayer][1] = mine;
+   G.hand[currPlayer][2] = silver;
    G.hand[currPlayer][3] = gold;
    G.hand[currPlayer][4] = silver;
    G.handCount[currPlayer] = 5;
@@ -625,7 +693,7 @@ int main() {
     }
     printf("\n");
 
-   handPos = 3;
+   handPos = 1;
    choice1 = 3;
    choice2 = copper;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
@@ -681,6 +749,26 @@ int main() {
       printf("Number of discards expected = %d\n\n", G.discardCount[currPlayer] + 1);
    }
 
+   if (testGame.playedCardCount == 0) {
+      printf("OK:  the played card count is 0.\n");
+      printf("Number of played cards before play = %d\n", played);
+      printf("Number of played cards after play = %d,  ", testGame.playedCardCount);
+      printf("Number of played cards expected = %d\n\n", played);
+   }
+   else {
+      printf("ERROR:  the played card count is not 0.\n");
+      printf("Number of played cards before play = %d\n", played);
+      printf("Number of played cards after play = %d,  ", testGame.playedCardCount);
+      printf("Number of played cards expected = %d\n\n", played);
+      int i;
+         for (i = 0; i < testGame.playedCardCount; i++) {
+            int card = testGame.playedCards[i];
+            char name[32];
+            cardNumToName(card, name);
+            printf("Played Card #%d is: %-13s \n", i, name);
+         }
+         printf("\n");
+   }
 
    if (testGame.handCount[currPlayer] == G.handCount[currPlayer]) {
       printf("OK:  the number of card in players hand should remain the same, for exchanging two cards.\n");
@@ -711,24 +799,31 @@ int main() {
    }
 
 
-      tempCard1 = G.hand[currPlayer][choice1];
-      cardNumToName(tempCard1, name1);
-      tempCard2 = testGame.hand[currPlayer][choice1];
-      cardNumToName(tempCard2, name2);
+   pos = -1;
+   found = 0;
+   for (i = 0; i < testGame.handCount[currPlayer]; i++) {
+      int card = testGame.hand[currPlayer][i];
+      if (card == copper) {
+         found = 1;
+         pos = i;
+      }
+   }
 
-
-   if (testGame.hand[currPlayer][choice1] == choice2) {
-      printf("OK:  %s has been added to hand.\n", name2);
-      printf("Number %d position in hand before play is = %s.\n", choice1, name1);
-      printf("Number %d position in hand after play is = %s,  ", choice1, name2);
-      printf("Number %d position in hand expected is = Copper.\n\n", choice1);
+   if (found) {
+      printf("OK:  Copper was added to hand at position %d.\n", pos);
+      if (pos == choice1) {
+         printf("Copper was added to the correct position.\n\n");
+      }
+      else {
+         printf("ERROR:  Copper was added to the wrong hand position.\n\n");
+      }
    }
    else {
-      printf("ERROR:  Copper was not added to hand.\n");
-      printf("Number %d position in hand before play is = %s.\n", choice1, name1);
-      printf("Number %d position in hand after play is = %s,  ", choice1, name2);
-      printf("Number %d position in hand expected is = Copper.\n\n", choice1);
+      printf("ERROR: Copper was not added to hand.\n\n");
    }
+
+
+
 
    // Players Hand
    printf("Players Hand After Play:\n");
@@ -759,7 +854,7 @@ int main() {
    G.hand[currPlayer][0] = copper;
    G.hand[currPlayer][1] = estate;
    G.hand[currPlayer][2] = copper;
-   G.hand[currPlayer][3] = gold;
+   G.hand[currPlayer][3] = mine;
    G.hand[currPlayer][4] = gold;
    G.handCount[currPlayer] = 5;
 
@@ -782,7 +877,7 @@ int main() {
     printf("\n");
 
 
-   handPos = 1;
+   handPos = 3;
    choice1 = 1;
    choice2 = silver;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
@@ -790,10 +885,10 @@ int main() {
 
 
    if (retError == -1) {
-      printf("OK:  there was a return error in mineCard of -1 because you can't buy silver with estate.\n\n");
+      printf("ERROR:  there was a return error in mineCard of -1 because you can't buy silver with estate.\n\n");
    }
    else if (retError == 0) {
-      printf("ERROR:  the return code of mine was 0, however it should be -1 because you can't buy silver with estate.\n\n");
+      printf("OK:  the return code of mine was 0, however it should be -1 because you can't buy silver with estate.\n\n");
    }
 
 
@@ -825,7 +920,6 @@ int main() {
    }
 
 
-
    if (testGame.discardCount[currPlayer] == G.discardCount[currPlayer]) {
       printf("OK:  the number of discards should remain the same\n");
       printf("Number of discards before play = %d\n", G.discardCount[currPlayer]);
@@ -839,6 +933,27 @@ int main() {
       printf("Number of discards expected = %d\n\n", G.discardCount[currPlayer]);
    }
 
+
+   if (testGame.playedCardCount == 0) {
+      printf("OK:  the played card count is 0.\n");
+      printf("Number of played cards before play = %d\n", played);
+      printf("Number of played cards after play = %d,  ", testGame.playedCardCount);
+      printf("Number of played cards expected = %d\n\n", played);
+   }
+   else {
+      printf("ERROR:  the played card count is not 0.\n");
+      printf("Number of played cards before play = %d\n", played);
+      printf("Number of played cards after play = %d,  ", testGame.playedCardCount);
+      printf("Number of played cards expected = %d\n\n", played);
+      int i;
+         for (i = 0; i < testGame.playedCardCount; i++) {
+            int card = testGame.playedCards[i];
+            char name[32];
+            cardNumToName(card, name);
+            printf("Played Card #%d is: %-13s \n", i, name);
+         }
+         printf("\n");
+   }
 
    if (testGame.handCount[currPlayer] == G.handCount[currPlayer]) {
       printf("OK:  the number of card in players hand should remain the same.\n");
@@ -869,23 +984,25 @@ int main() {
    }
 
 
-   tempCard1 = G.hand[currPlayer][choice1];
-   cardNumToName(tempCard1, name1); //estate
-   tempCard2 = testGame.hand[currPlayer][choice1];
-   cardNumToName(tempCard2, name2);  //silver
 
-   if (testGame.hand[currPlayer][choice1] == G.hand[currPlayer][choice1]) {
-      printf("OK:  Silver should not have been added to hand.\n");
-      printf("Number %d position in hand before play is = %s.\n", choice1, name1);
-      printf("Number %d position in hand after play is = %s,  ", choice1, name2);
-      printf("Number %d position in hand expected is = %s.\n\n", choice1, name1);
+   pos = -1;
+   found = 0;
+   for (i = 0; i < testGame.handCount[currPlayer]; i++) {
+      int card = testGame.hand[currPlayer][i];
+      if (card == silver) {
+         found = 1;
+         pos = i;
+      }
+   }
+
+   if (!found) {
+      printf("OK:  Silver was not added to hand.\n\n");
    }
    else {
-      printf("ERROR:  %s has been added to hand.\n", name2);
-      printf("Number %d position in hand before play is = %s.\n", choice1, name1);
-      printf("Number %d position in hand after play is = %s,  ", choice1, name2);
-      printf("Number %d position in hand expected is = %s.\n\n", choice1, name1);
+      printf("ERROR: Silver has been added to hand.\n");
+      printf("Silver was found in position %d\n\n", pos);
    }
+
 
 
    // Players Hand
@@ -911,15 +1028,15 @@ int main() {
    printf("** choice1 = 4 (copper), choice2 = silver\n");
    printf("** this is testing silver (5) in the 5 position of the hand\n");
    printf("** number of actions should stay the same, number of coins should stay the same\n");
-   printf("** supply decrease by 1, hand count remains the same, discard decrease by 1\n\n\n");
+   printf("** supply decrease by 1, hand count remains the same, discard increase by 1\n\n\n");
 
 
-   G.hand[currPlayer][0] = copper;
-   G.hand[currPlayer][1] = copper;
-   G.hand[currPlayer][2] = silver;
-   G.hand[currPlayer][3] = silver;
+   G.hand[currPlayer][0] = mine;
+   G.hand[currPlayer][1] = province;
+   G.hand[currPlayer][2] = curse;
+   G.hand[currPlayer][3] = estate;
    G.hand[currPlayer][4] = copper;
-   G.hand[currPlayer][5] = silver;
+   G.hand[currPlayer][5] = duchy;
    G.handCount[currPlayer] = 6;
 
 
@@ -940,7 +1057,7 @@ int main() {
     }
     printf("\n");
 
-   handPos = 4;
+   handPos = 0;
    choice1 = 4;
    choice2 = silver;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
@@ -996,6 +1113,26 @@ int main() {
       printf("Number of discards expected = %d\n\n", G.discardCount[currPlayer] + 1);
    }
 
+   if (testGame.playedCardCount == 0) {
+      printf("OK:  the played card count is 0.\n");
+      printf("Number of played cards before play = %d\n", played);
+      printf("Number of played cards after play = %d,  ", testGame.playedCardCount);
+      printf("Number of played cards expected = %d\n\n", played);
+   }
+   else {
+      printf("ERROR:  the played card count is not 0.\n");
+      printf("Number of played cards before play = %d\n", played);
+      printf("Number of played cards after play = %d,  ", testGame.playedCardCount);
+      printf("Number of played cards expected = %d\n\n", played);
+      int i;
+         for (i = 0; i < testGame.playedCardCount; i++) {
+            int card = testGame.playedCards[i];
+            char name[32];
+            cardNumToName(card, name);
+            printf("Played Card #%d is: %-13s \n", i, name);
+         }
+         printf("\n");
+   }
 
    if (testGame.handCount[currPlayer] == G.handCount[currPlayer]) {
       printf("OK:  the number of card in players hand should remain the same, for exchanging two cards.\n");
@@ -1026,24 +1163,31 @@ int main() {
    }
 
 
-      tempCard1 = G.hand[currPlayer][choice1];
-      cardNumToName(tempCard1, name1);
-      tempCard2 = testGame.hand[currPlayer][choice1];
-      cardNumToName(tempCard2, name2);
+   pos = -1;
+   found = 0;
+   for (i = 0; i < testGame.handCount[currPlayer]; i++) {
+      int card = testGame.hand[currPlayer][i];
+      if (card == silver) {
+         found = 1;
+         pos = i;
+      }
+   }
 
-
-   if (testGame.hand[currPlayer][choice1] == choice2) {
-      printf("OK:  %s has been added to hand.\n", name2);
-      printf("Number %d position in hand before play is = %s.\n", choice1, name1);
-      printf("Number %d position in hand after play is = %s,  ", choice1, name2);
-      printf("Number %d position in hand expected is = Silver.\n\n", choice1);
+   if (found) {
+      printf("OK:  Silver was added to hand at position %d.\n\n", pos);
+      if (pos == choice1) {
+         printf("Silver was added to the correct position.\n\n");
+      }
+      else {
+         printf("ERROR:  Silver was added to the wrong hand position.\n\n");
+      }
    }
    else {
-      printf("ERROR:  Silver was not added to hand.\n");
-      printf("Number %d position in hand before play is = %s.\n", choice1, name1);
-      printf("Number %d position in hand after play is = %s,  ", choice1, name2);
-      printf("Number %d position in hand expected is = Silver.\n\n", choice1);
+      printf("ERROR: Silver was not added to hand.\n\n");
    }
+
+
+
 
    // Players Hand
    printf("Players Hand After Play:\n");

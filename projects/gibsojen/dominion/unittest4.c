@@ -115,12 +115,8 @@ int main() {
    initializeGame(numOfPlayers, k, seed, &G);
 
    //int handPos = -1;
-   //int bonus = 0;
    int currPlayer = 0;
    int nextPlayer = 1;
-   //int choice1 = 0;
-   //int choice2 = 0;
-   //int choice3 = 0;
    int retError;
 
 
@@ -146,7 +142,8 @@ int main() {
    G.deck[nextPlayer][4] = silver;
    G.deck[nextPlayer][5] = gold;
    G.deck[nextPlayer][6] = silver;
-   G.deckCount[nextPlayer] = 5;
+   G.deck[nextPlayer][7] = gold;
+   G.deckCount[nextPlayer] = 8;
 
    // copy game state for test game
    memcpy(&testGame, &G, sizeof(struct gameState));
@@ -214,14 +211,14 @@ int main() {
       printf("Number of discards expected = %d\n\n", G.discardCount[nextPlayer] + 2);
    }
    else {
-      printf("ERROR:  the discard count of next player did not decrease by 2.\n");
+      printf("ERROR:  the discard count of next player did not increase by 2.\n");
       printf("Number of discards before play = %d\n", G.discardCount[nextPlayer]);
       printf("Number of discards after play = %d,  ", testGame.discardCount[nextPlayer]);
       printf("Number of discards expected = %d\n\n", G.discardCount[nextPlayer] + 2);
    }
 
 
-   if (G.coins +4 == testGame.coins) {
+   if (G.coins + 4 == testGame.coins) {
       printf("OK:  the number of coins increased by 4, 2 for each treasure card.\n");
       printf("Number of coins before play = %d\n", G.coins);
       printf("Number of coins after play = %d,  ", testGame.coins);
@@ -400,7 +397,7 @@ int main() {
       printf("Number of discards expected = %d\n\n", G.discardCount[nextPlayer] + 2);
    }
    else {
-      printf("ERROR:  the discard count of next player did not decrease by 2.\n");
+      printf("ERROR:  the discard count of next player did not increase by 2.\n");
       printf("Number of discards before play = %d\n", G.discardCount[nextPlayer]);
       printf("Number of discards after play = %d,  ", testGame.discardCount[nextPlayer]);
       printf("Number of discards expected = %d\n\n", G.discardCount[nextPlayer] + 2);
@@ -422,17 +419,17 @@ int main() {
 
 
 
-   if (G.numActions + 2 == testGame.numActions) {
-      printf("OK:  the number of actions increased by 2.\n");
+   if (G.numActions + 4 == testGame.numActions) {
+      printf("OK:  the number of actions increased by 4, 2 for each action card revealed.\n");
       printf("Number of actions before play = %d\n", G.numActions);
       printf("Number of actions after play = %d,  ", testGame.numActions);
-      printf("Number of actions expected = %d\n\n", G.numActions + 2);
+      printf("Number of actions expected = %d\n\n", G.numActions + 4);
    }
    else {
-      printf("ERROR:  the number of actions did not increase by 2.\n");
+      printf("ERROR:  the number of actions did not increase by 4, 2 for each action card revealed.\n");
       printf("Number of actions before play = %d\n", G.numActions);
       printf("Number of actions after play = %d,  ", testGame.numActions);
-      printf("Number of actions expected = %d\n\n", G.numActions + 2);
+      printf("Number of actions expected = %d\n\n", G.numActions + 4);
    }
 
 
@@ -682,6 +679,7 @@ int main() {
 
    G.deck[nextPlayer][0] = gold;
    G.deckCount[nextPlayer] = 1;
+   G.discardCount[nextPlayer] = 0;
 
    // copy game state for test game
    memcpy(&testGame, &G, sizeof(struct gameState));
@@ -854,6 +852,7 @@ int main() {
    //G.deck[nextPlayer][0] = gold;
    G.deckCount[nextPlayer] = 0;
    G.discard[nextPlayer][0] = gold;
+   G.discard[nextPlayer][1] = silver;
    G.discardCount[nextPlayer] = 1;
 
    // copy game state for test game
@@ -1113,7 +1112,7 @@ int main() {
       printf("Number of discards expected = %d\n\n", G.discardCount[nextPlayer] + 2);
    }
    else {
-      printf("ERROR:  the discard count of next player did not decrease by 2.\n");
+      printf("ERROR:  the discard count of next player did not increase by 2.\n");
       printf("Number of discards before play = %d\n", G.discardCount[nextPlayer]);
       printf("Number of discards after play = %d,  ", testGame.discardCount[nextPlayer]);
       printf("Number of discards expected = %d\n\n", G.discardCount[nextPlayer] + 2);

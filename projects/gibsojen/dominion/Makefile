@@ -41,28 +41,28 @@ unittestresults: dominion.o
 	./unittest1 >> unittestresults.out
 	#gcov kingdom_cards.c -f -b >> unittestresults.out
 
-	echo "------------------------------------------------------------------------------------------" >> unittestresults.out
+	echo "--------------------------------------------------------------------------------------------------------------------------------" >> unittestresults.out
 	echo "Result for running Unit 2 tests:" >> unittestresults.out
 	echo "unittest2.c:" >> unittestresults.out
 	gcc -o unittest2 -g unittest2.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
 	./unittest2 >> unittestresults.out
 	#gcov kingdom_cards.c -f -b >> unittestresults.out
 	
-	echo "------------------------------------------------------------------------------------------" >> unittestresults.out
+	echo "--------------------------------------------------------------------------------------------------------------------------------" >> unittestresults.out
 	echo "Result for running Unit 3 tests:" >> unittestresults.out
 	echo "unittest3.c:" >> unittestresults.out
 	gcc -o unittest3 -g unittest3.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
 	./unittest3 >> unittestresults.out
 	#gcov kingdom_cards.c -f -b >> unittestresults.out
 	
-	echo "------------------------------------------------------------------------------------------" >> unittestresults.out
+	echo "--------------------------------------------------------------------------------------------------------------------------------" >> unittestresults.out
 	echo "Result for running Unit 4 tests:" >> unittestresults.out
 	echo "unittest4.c:" >> unittestresults.out
 	gcc -o unittest4 -g unittest4.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
 	./unittest4 >> unittestresults.out
 	#gcov kingdom_cards.c -f -b >> unittestresults.out
 	
-	echo "------------------------------------------------------------------------------------------" >> unittestresults.out
+	echo "--------------------------------------------------------------------------------------------------------------------------------" >> unittestresults.out
 	echo "Result for running Unit 5 tests:" >> unittestresults.out
 	echo "unittest5.c:" >> unittestresults.out
 	gcc -o unittest5 -g unittest5.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
