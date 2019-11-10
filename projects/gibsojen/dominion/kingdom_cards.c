@@ -111,15 +111,17 @@ int minionCard (int choice1, int choice2, struct gameState *state, int handPos, 
 
             //draw 4
             for (i = 0; i < 4; i++)
-            {
+           {  
                 drawCard(currentPlayer, state);
             }
 
             //other players discard hand and redraw if hand size > 4
-            for (i = 0; i <= state->numPlayers; i++)  // introduced bug from < to <=
+            for (i = 0; i < state->numPlayers; i++)  // introduced bug from < to <= //fixed for random tests, caused seg fault
             {
                 if (i != currentPlayer)
                 {
+                //printf("i:  %d\n", i);
+	        //printf("state->handCount[i] = %d\n", state->handCount[i]);
                     if ( state->handCount[i] > 4 )
                     {
                         //discard hand
@@ -138,6 +140,8 @@ int minionCard (int choice1, int choice2, struct gameState *state, int handPos, 
             }
 
         }
+
+ 
         return 0;
 
 
