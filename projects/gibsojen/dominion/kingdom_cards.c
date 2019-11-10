@@ -245,7 +245,7 @@ int tributeCard (struct gameState *state, int currentPlayer) {
 
         else {
             if (state->deckCount[nextPlayer] == 0) {
-                for (i = 0; i <= state->discardCount[nextPlayer]; i++) {  // intro bug.  changed from < to <=
+                for (i = 0; i <= state->discardCount[nextPlayer]; i++) {  // intro bug.  changed from < to <= 
                     state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
                     state->deckCount[nextPlayer]++;
                     state->discard[nextPlayer][i] = -1;

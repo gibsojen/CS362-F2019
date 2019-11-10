@@ -214,8 +214,8 @@ int main() {
       choice2 = (rand() % 4) - 1; // -1 to 2
       G.whoseTurn = players;
 
-      G.deckCount[players] = rand() * MAX_DECK;
-      G.deckCount[player2] = rand() * MAX_DECK;
+      G.deckCount[players] = rand() % MAX_DECK;
+      G.deckCount[player2] = rand() % MAX_DECK;
      
       G.discardCount[players] = rand() % MAX_DECK;
       G.discardCount[player2] = rand() % MAX_DECK;
