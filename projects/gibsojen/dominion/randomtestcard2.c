@@ -15,13 +15,6 @@ int minionTest(int choice1, int choice2, struct gameState *G, int handPos, int p
 
    int retErr;
 
-/*
-   printf("choice1 = %d\n", choice1);
-   printf("choice2 = %d\n", choice2);
-   printf("players = %d\n", players);
-   printf("hand count = %d\n", testGame.handCount[players]);
-   printf("handPos = %d\n", handPos);
-*/
 
    //int minionCard (int choice1, int choice2, struct gameState *state, int handPos, int currentPlayer) {
    retErr = minionCard(choice1, choice2, &testGame, handPos, players);
@@ -36,6 +29,8 @@ int minionTest(int choice1, int choice2, struct gameState *G, int handPos, int p
       }
       else {
          printf("ERROR: numActions did not increase by 1.\n");
+         printf("numActions before = %d\n", G->numActions);
+         printf("numActions after = %d\n", testGame.numActions);
       }
 
       if(G->coins + 2 == testGame.coins) {
@@ -43,6 +38,8 @@ int minionTest(int choice1, int choice2, struct gameState *G, int handPos, int p
       }
       else {
          printf("ERROR: coins did not increase by 2.\n");
+         printf("coins before = %d\n", G->coins);
+         printf("coins after = %d\n", testGame.coins);
       }
 
       if(G->discardCount[players] == testGame.discardCount[players]) {
@@ -50,6 +47,8 @@ int minionTest(int choice1, int choice2, struct gameState *G, int handPos, int p
       }
       else {
          printf("ERROR: discards did not stay the same.\n");
+         printf("discard count before = %d\n", G->discardCount[players]);
+         printf("discard count after = %d\n", testGame.discardCount[players]);
       }
 
       if(G->handCount[players] == testGame.handCount[players]) {
@@ -57,6 +56,8 @@ int minionTest(int choice1, int choice2, struct gameState *G, int handPos, int p
       }
       else {
          printf("ERROR: hand count did not stay the same.\n");
+         printf("hand count before = %d\n", G->handCount[players]);
+         printf("hand count after = %d\n", testGame.handCount[players]);
       }
    }
    
@@ -69,6 +70,8 @@ int minionTest(int choice1, int choice2, struct gameState *G, int handPos, int p
       }
       else {
          printf("ERROR: numActions did not increase by 1.\n");
+         printf("numActions before = %d\n", G->numActions);
+         printf("numActions after = %d\n", testGame.numActions);
       }
 
       if(G->coins == testGame.coins) {
@@ -76,6 +79,8 @@ int minionTest(int choice1, int choice2, struct gameState *G, int handPos, int p
       }
       else {
          printf("ERROR: coins did not stay the same.\n");
+         printf("coins before = %d\n", G->coins);
+         printf("coins after = %d\n", testGame.coins);
       }
 
       if(G->discardCount[players] + 1 == testGame.discardCount[players]) {
@@ -83,6 +88,8 @@ int minionTest(int choice1, int choice2, struct gameState *G, int handPos, int p
       }
       else {
          printf("ERROR: discards did not increase by 1 for discarding minion.\n");
+         printf("discard count before = %d\n", G->discardCount[players]);
+         printf("discard count after = %d\n", testGame.discardCount[players]);
       }
 
       if(G->handCount[players] - 1 == testGame.handCount[players]) {
@@ -90,6 +97,8 @@ int minionTest(int choice1, int choice2, struct gameState *G, int handPos, int p
       }
       else {
          printf("ERROR: hand count did not decrease by 1 for discarding minion.\n");
+         printf("hand count before = %d\n", G->handCount[players]);
+         printf("hand count after = %d\n", testGame.handCount[players]);
       }
 
       if(G->discardCount[player2] == testGame.discardCount[player2]) {
@@ -97,6 +106,8 @@ int minionTest(int choice1, int choice2, struct gameState *G, int handPos, int p
       }
       else {
          printf("ERROR: discards of player2 did not stay the same.\n");
+         printf("discard count before = %d\n", G->discardCount[player2]);
+         printf("discard count after = %d\n", testGame.discardCount[player2]);
       }
 
       if(G->handCount[player2] == testGame.handCount[player2]) {
@@ -104,6 +115,8 @@ int minionTest(int choice1, int choice2, struct gameState *G, int handPos, int p
       }
       else {
          printf("ERROR: hand count of player2 did not stay the same.\n");
+         printf("hand count before = %d\n", G->handCount[player2]);
+         printf("hand count after = %d\n", testGame.handCount[player2]);
       }
 
 
@@ -118,6 +131,17 @@ int minionTest(int choice1, int choice2, struct gameState *G, int handPos, int p
       }
       else {
          printf("ERROR: numActions did not increase by 1.\n");
+         printf("numActions before = %d\n", G->numActions);
+         printf("numActions after = %d\n", testGame.numActions);
+      }
+
+      if(G->coins == testGame.coins) {
+         printf("OK: coins stayed the same.\n");
+      }
+      else {
+         printf("ERROR: coins did not stay the same.\n");
+         printf("coins before = %d\n", G->coins);
+         printf("coins after = %d\n", testGame.coins);
       }
 
       if(G->handCount[players] + G->discardCount[players] == testGame.discardCount[players]) {
@@ -196,6 +220,7 @@ int main() {
       // int num = (rand() % (upper - lower + 1)) + lower;
       //
       G.numBuys = rand() % MAX_DECK;
+      G.coins = rand() % 40;
    
       //set number of players
       G.numPlayers = 2;

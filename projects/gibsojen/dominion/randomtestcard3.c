@@ -276,7 +276,7 @@ int main() {
 		cutpurse, sea_hag, tribute};
 */
 
-   int set[10] = {copper, gold, silver, estate, village, mine, province,
+   int set[10] = {copper, gold, silver, estate, duchy, mine, province,
 		  cutpurse, tribute, baron};
    int i;
    int j;
