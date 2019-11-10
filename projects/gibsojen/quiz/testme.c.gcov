@@ -8,44 +8,44 @@
         -:    3:#include<stdlib.h>
         -:    4:#include<time.h>
         -:    5:
-function inputChar called 1460 returned 100% blocks executed 100%
-     1460:    6:char inputChar()
+function inputChar called 2043 returned 100% blocks executed 100%
+     2043:    6:char inputChar()
         -:    7:{
         -:    8:    char c;
         -:    9:    // from 32 to 126
-     1460:   10:    int number = (rand() % (126 - 32)) + 32;
+     2043:   10:    int number = (rand() % (126 - 32)) + 32;
 call    0 returned 100%
         -:   11:    //printf ("test: %d\n", test);
-     1460:   12:    c = number;
+     2043:   12:    c = number;
         -:   13:    //printf("char:  %c\n", c);
-     1460:   14:    return c;
+     2043:   14:    return c;
         -:   15:}
         -:   16:
-function inputString called 1460 returned 100% blocks executed 100%
-     1460:   17:char *inputString()
+function inputString called 2043 returned 100% blocks executed 100%
+     2043:   17:char *inputString()
         -:   18:{
         -:   19:
         -:   20:    // from 0 to 9
         -:   21:   static char str[6];
         -:   22:   int number[3];
-     1460:   23:   number[0] = 101;  //e
-     1460:   24:   number[1] = 114;  //r
-     1460:   25:   number[2] = 115;  //s
-     1460:   26:   number[3] = 116;  //t
+     2043:   23:   number[0] = 101;  //e
+     2043:   24:   number[1] = 114;  //r
+     2043:   25:   number[2] = 115;  //s
+     2043:   26:   number[3] = 116;  //t
         -:   27:
         -:   28:   int pos;
         -:   29:   int i;
         -:   30:
-     8760:   31:   for (i = 0; i < 5; i++) {
+    12258:   31:   for (i = 0; i < 5; i++) {
 branch  0 taken 83%
 branch  1 taken 17% (fallthrough)
-     7300:   32:      pos = rand() % 4;
+    10215:   32:      pos = rand() % 4;
 call    0 returned 100%
-     7300:   33:      str[i] = number[pos];
+    10215:   33:      str[i] = number[pos];
         -:   34:   }
-     1460:   35:   str[5] = '\0';
+     2043:   35:   str[5] = '\0';
         -:   36:   //printf("string:  %s\n\n", str);
-     1460:   37:   return str;
+     2043:   37:   return str;
         -:   38:
         -:   39:}
         -:   40:
@@ -58,69 +58,69 @@ function testme called 1 returned 0% blocks executed 100%
         1:   46:  int state = 0;
         -:   47:  while (1)
         -:   48:  {
-     1460:   49:    tcCount++;
-     1460:   50:    c = inputChar();
+     2043:   49:    tcCount++;
+     2043:   50:    c = inputChar();
 call    0 returned 100%
-     1460:   51:    s = inputString();
+     2043:   51:    s = inputString();
 call    0 returned 100%
-     1460:   52:    printf("Iteration %d: c = %c, s = %s, state = %d\n", tcCount, c, s, state);
+     2043:   52:    printf("Iteration %d: c = %c, s = %s, state = %d\n", tcCount, c, s, state);
 call    0 returned 100%
         -:   53:
-     1460:   54:    if (c == '[' && state == 0) state = 1;
+     2043:   54:    if (c == '[' && state == 0) state = 1;
 branch  0 taken 1% (fallthrough)
 branch  1 taken 99%
-branch  2 taken 6% (fallthrough)
-branch  3 taken 94%
-     1460:   55:    if (c == '(' && state == 1) state = 2;
-branch  0 taken 1% (fallthrough)
-branch  1 taken 99%
-branch  2 taken 6% (fallthrough)
-branch  3 taken 94%
-     1460:   56:    if (c == '{' && state == 2) state = 3;
+branch  2 taken 4% (fallthrough)
+branch  3 taken 96%
+     2043:   55:    if (c == '(' && state == 1) state = 2;
 branch  0 taken 1% (fallthrough)
 branch  1 taken 99%
 branch  2 taken 8% (fallthrough)
 branch  3 taken 92%
-     1460:   57:    if (c == ' '&& state == 3) state = 4;
-branch  0 taken 1% (fallthrough)
-branch  1 taken 99%
-branch  2 taken 7% (fallthrough)
-branch  3 taken 93%
-     1460:   58:    if (c == 'a' && state == 4) state = 5;
-branch  0 taken 1% (fallthrough)
-branch  1 taken 99%
-branch  2 taken 5% (fallthrough)
-branch  3 taken 95%
-     1460:   59:    if (c == 'x' && state == 5) state = 6;
-branch  0 taken 1% (fallthrough)
-branch  1 taken 99%
-branch  2 taken 10% (fallthrough)
-branch  3 taken 90%
-     1460:   60:    if (c == '}' && state == 6) state = 7;
-branch  0 taken 2% (fallthrough)
-branch  1 taken 98%
-branch  2 taken 4% (fallthrough)
-branch  3 taken 96%
-     1460:   61:    if (c == ')' && state == 7) state = 8;
-branch  0 taken 2% (fallthrough)
-branch  1 taken 98%
-branch  2 taken 5% (fallthrough)
-branch  3 taken 95%
-     1460:   62:    if (c == ']' && state == 8) state = 9;
+     2043:   56:    if (c == '{' && state == 2) state = 3;
 branch  0 taken 1% (fallthrough)
 branch  1 taken 99%
 branch  2 taken 6% (fallthrough)
 branch  3 taken 94%
-     1460:   63:    if (s[0] == 'r' && s[1] == 'e'
-branch  0 taken 24% (fallthrough)
-branch  1 taken 76%
-branch  2 taken 26% (fallthrough)
-branch  3 taken 74%
-       93:   64:       && s[2] == 's' && s[3] == 'e'
-branch  0 taken 31% (fallthrough)
-branch  1 taken 69%
-branch  2 taken 24% (fallthrough)
-branch  3 taken 76%
+     2043:   57:    if (c == ' '&& state == 3) state = 4;
+branch  0 taken 1% (fallthrough)
+branch  1 taken 99%
+branch  2 taken 4% (fallthrough)
+branch  3 taken 96%
+     2043:   58:    if (c == 'a' && state == 4) state = 5;
+branch  0 taken 1% (fallthrough)
+branch  1 taken 99%
+branch  2 taken 4% (fallthrough)
+branch  3 taken 96%
+     2043:   59:    if (c == 'x' && state == 5) state = 6;
+branch  0 taken 1% (fallthrough)
+branch  1 taken 99%
+branch  2 taken 6% (fallthrough)
+branch  3 taken 94%
+     2043:   60:    if (c == '}' && state == 6) state = 7;
+branch  0 taken 1% (fallthrough)
+branch  1 taken 99%
+branch  2 taken 4% (fallthrough)
+branch  3 taken 96%
+     2043:   61:    if (c == ')' && state == 7) state = 8;
+branch  0 taken 1% (fallthrough)
+branch  1 taken 99%
+branch  2 taken 5% (fallthrough)
+branch  3 taken 95%
+     2043:   62:    if (c == ']' && state == 8) state = 9;
+branch  0 taken 1% (fallthrough)
+branch  1 taken 99%
+branch  2 taken 5% (fallthrough)
+branch  3 taken 95%
+     2043:   63:    if (s[0] == 'r' && s[1] == 'e'
+branch  0 taken 25% (fallthrough)
+branch  1 taken 75%
+branch  2 taken 27% (fallthrough)
+branch  3 taken 73%
+      136:   64:       && s[2] == 's' && s[3] == 'e'
+branch  0 taken 27% (fallthrough)
+branch  1 taken 73%
+branch  2 taken 19% (fallthrough)
+branch  3 taken 81%
         7:   65:       && s[4] == 't' && s[5] == '\0'
 branch  0 taken 14% (fallthrough)
 branch  1 taken 86%
@@ -135,7 +135,7 @@ call    0 returned 100%
         1:   69:      exit(200);
 call    0 returned 0%
         -:   70:    }
-     1459:   71:  }
+     2042:   71:  }
         -:   72:}
         -:   73:
         -:   74:
