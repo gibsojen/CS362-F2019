@@ -1,6 +1,5 @@
 #include "dominion.h"
 #include "dominion_helpers.h"
-#include "kingdom_cards.h"
 #include <stdio.h>
 #include "rngs.h"
 #include <stdlib.h>
@@ -17,7 +16,7 @@ int minionTest(int choice1, int choice2, struct gameState *G, int handPos, int p
 
 
    //int minionCard (int choice1, int choice2, struct gameState *state, int handPos, int currentPlayer) {
-   retErr = minionEffect(choice1, choice2, &testGame, handPos, players);
+   retErr = minionEffect(choice1, choice2, handPos, &testGame, players);
 
 
    if (choice1 >= 1) {

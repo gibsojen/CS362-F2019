@@ -30,7 +30,7 @@ player: player.c interface.o
 
 all: playdom player 
 
-unittestresults: dominion.o
+testresults: dominion.o
 	
 	echo "Result for running Unit 1 tests:" > unittestresults.out
 	echo "unittest1.c:" >> unittestresults.out
@@ -66,5 +66,26 @@ unittestresults: dominion.o
 	./unittest5 >> unittestresults.out
 	gcov dominion.c -f -b >> unittestresults.out
 
+	echo "--------------------------------------------------------------------------------------------------------------------------------" >> unittestresults.out
+	echo "Results for Random Test 1:" > randomtestresults.out
+	echo "randomtestcard1.c:" >> randomtestresults.out
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard1 >> randomtestresults.out
+	#gcov dominion.c -f -b >> randomtestresults.out
+
+	echo "--------------------------------------------------------------------------------------------------------------------------------" >> unittestresults.out
+	echo "Results for Random Test 2:" >> randomtestresults.out
+	echo "randomtestcard2.c:" >> randomtestresults.out
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard2 >> randomtestresults.out
+	#gcov dominion.c -f -b >> randomtestresults.out
+
+	echo "--------------------------------------------------------------------------------------------------------------------------------" >> unittestresults.out
+	echo "Results for Random Test 3:" >> randomtestresults.out
+	echo "randomtestcard3.c:" >> randomtestresults.out
+	gcc -o randomtestcard3 -g randomtestcard3.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard3 >> randomtestresults.out
+	gcov dominion.c -f -b >> randomtestresults.out
+
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unittest1 unittest2 unittest3 unittest4 unittest5
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unittest1 unittest2 unittest3 unittest4 unittest5 randomtestcard1 randomtestcard2 randomtestcard3
