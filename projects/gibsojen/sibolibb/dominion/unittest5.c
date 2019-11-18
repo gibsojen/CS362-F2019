@@ -159,7 +159,7 @@ int main() {
    choice1 = 3;
    choice2 = gold;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = mineEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = mineEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
 
    if (retError == 0) {
@@ -340,7 +340,7 @@ int main() {
    choice1 = 3;
    choice2 = duchy;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = mineEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = mineEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
 
    if (retError == -1) {
@@ -518,7 +518,7 @@ int main() {
    choice1 = 1;
    choice2 = gold;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = mineEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = mineEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
 
    if (retError == -1) {
@@ -696,7 +696,7 @@ int main() {
    choice1 = 3;
    choice2 = copper;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = mineEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = mineEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
 
    if (retError == 0) {
@@ -880,7 +880,7 @@ int main() {
    choice1 = 1;
    choice2 = silver;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = mineEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = mineEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
 
    if (retError == -1) {
@@ -1060,7 +1060,7 @@ int main() {
    choice1 = 4;
    choice2 = silver;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = mineEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = mineEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
 
    if (retError == 0) {

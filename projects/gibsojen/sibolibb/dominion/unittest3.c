@@ -164,7 +164,7 @@ int main() {
    int played = testGame.playedCardCount;
 
    //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = ambassadorEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = ambassadorEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[selectedCard]);
@@ -314,7 +314,7 @@ int main() {
    played = testGame.playedCardCount;
 
    //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = ambassadorEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = ambassadorEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
    if (retError == 0) {
       printf("OK:  the return code of ambassador was 0.\n\n");
@@ -458,7 +458,7 @@ int main() {
    played = testGame.playedCardCount;
 
    //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = ambassadorEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = ambassadorEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
 
    if (retError == 0) {
@@ -600,7 +600,7 @@ int main() {
    played = testGame.playedCardCount;
    
    //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = ambassadorEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = ambassadorEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[selectedCard]);
@@ -700,7 +700,7 @@ int main() {
    played = testGame.playedCardCount;
 
    //cardEffect(ambassador, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = ambassadorEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = ambassadorEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
    //printf("supply:  %d\n\n", G.supplyCount[selectedCard]);
    //printf("supply:  %d\n\n", testGame.supplyCount[selectedCard]);

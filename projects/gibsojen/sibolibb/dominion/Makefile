@@ -64,7 +64,7 @@ unittestresults: dominion.o
 	echo "unittest5.c:" >> unittestresults.out
 	gcc -o unittest5 -g unittest5.c dominion.o rngs.o $(CFLAGS)
 	./unittest5 >> unittestresults.out
-	#gcov dominion.c -f -b >> unittestresults.out
+	gcov dominion.c -f -b >> unittestresults.out
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unittest1 unittest2 unittest3 unittest4 unittest5

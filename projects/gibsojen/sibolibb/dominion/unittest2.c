@@ -149,7 +149,7 @@ int main() {
    choice1 = 1;
    choice2 = 0;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = minionEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = minionEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
 
    if (retError == 0) {
@@ -264,7 +264,7 @@ int main() {
    choice1 = 0;
    choice2 = 1;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = minionEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = minionEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
    
    if (retError == 0) {
@@ -437,7 +437,7 @@ int main() {
    int played = testGame.playedCardCount;
 
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = minionEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = minionEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
 
    if (retError == 0) {
@@ -564,7 +564,7 @@ int main() {
    choice1 = 1;
    choice2 = 1;
    //cardEffect(minion, choice1, choice2, choice3, &testGame, handPos, &bonus);
-   retError = minionEffect (choice1, choice2, &testGame, handPos, currPlayer);
+   retError = minionEffect (choice1, choice2, handPos, &testGame, currPlayer);
 
 
    if (retError == 0) {
