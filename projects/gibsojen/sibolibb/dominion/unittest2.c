@@ -113,7 +113,7 @@ int main() {
    // initialize game
    initializeGame(numOfPlayers, k, seed, &G);
 
-   int handPos = -1;
+   int handPos = 1;
    int currPlayer = 0;
    int choice1 = 0;
    int choice2 = 0;

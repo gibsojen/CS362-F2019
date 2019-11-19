@@ -30,7 +30,7 @@ player: player.c interface.o
 
 all: playdom player 
 
-testresults: dominion.o
+unittestresults: dominion.o
 	
 	echo "Result for running Unit 1 tests:" > unittestresults.out
 	echo "unittest1.c:" >> unittestresults.out
@@ -65,6 +65,8 @@ testresults: dominion.o
 	gcc -o unittest5 -g unittest5.c dominion.o rngs.o $(CFLAGS)
 	./unittest5 >> unittestresults.out
 	gcov dominion.c -f -b >> unittestresults.out
+
+randomtestresults: dominion.o
 
 	echo "--------------------------------------------------------------------------------------------------------------------------------" >> unittestresults.out
 	echo "Results for Random Test 1:" > randomtestresults.out
