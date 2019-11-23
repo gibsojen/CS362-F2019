@@ -33,41 +33,17 @@ player: player.c interface.o
 
 all: playdom player 
 
-unittestresults: dominion.o
+fin: dominion.o
 	
-	echo "Result for running Unit 1 tests:" > unittestresults.out
-	echo "unittest1.c:" >> unittestresults.out
-	gcc -o unittest1 -g unittest1.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
-	./unittest1 >> unittestresults.out
+	#echo "Result for running Unit 1 tests:" > unittestresults.out
+	#echo "unittest1.c:" >> unittestresults.out
+	gcc -o fin -g final.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
+	gcc -o fin2 -g final2.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
+	gcc -o fin3 -g final3.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
+	gcc -o fin4 -g final4.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
+	#./unittest1 >> unittestresults.out
 	#gcov kingdom_cards.c -f -b >> unittestresults.out
 
-	echo "--------------------------------------------------------------------------------------------------------------------------------" >> unittestresults.out
-	echo "Result for running Unit 2 tests:" >> unittestresults.out
-	echo "unittest2.c:" >> unittestresults.out
-	gcc -o unittest2 -g unittest2.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
-	./unittest2 >> unittestresults.out
-	#gcov kingdom_cards.c -f -b >> unittestresults.out
-	
-	echo "--------------------------------------------------------------------------------------------------------------------------------" >> unittestresults.out
-	echo "Result for running Unit 3 tests:" >> unittestresults.out
-	echo "unittest3.c:" >> unittestresults.out
-	gcc -o unittest3 -g unittest3.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
-	./unittest3 >> unittestresults.out
-	#gcov kingdom_cards.c -f -b >> unittestresults.out
-	
-	echo "--------------------------------------------------------------------------------------------------------------------------------" >> unittestresults.out
-	echo "Result for running Unit 4 tests:" >> unittestresults.out
-	echo "unittest4.c:" >> unittestresults.out
-	gcc -o unittest4 -g unittest4.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
-	./unittest4 >> unittestresults.out
-	#gcov kingdom_cards.c -f -b >> unittestresults.out
-	
-	echo "--------------------------------------------------------------------------------------------------------------------------------" >> unittestresults.out
-	echo "Result for running Unit 5 tests:" >> unittestresults.out
-	echo "unittest5.c:" >> unittestresults.out
-	gcc -o unittest5 -g unittest5.c dominion.o rngs.o kingdom_cards.o $(CFLAGS)
-	./unittest5 >> unittestresults.out
-	gcov kingdom_cards.c -f -b >> unittestresults.out
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unittest1
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe fin fin2 fin3 fin4

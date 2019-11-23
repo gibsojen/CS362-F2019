@@ -224,7 +224,7 @@ int tributeCard (struct gameState *state, int currentPlayer) {
 
         else {
             if (state->deckCount[nextPlayer] == 0) {
-                for (i = 0; i <= state->discardCount[nextPlayer]; i++) {  // intro bug.  changed from < to <=
+                for (i = 0; i < state->discardCount[nextPlayer]; i++) {  // intro bug.  changed from < to <=
                     state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
                     state->deckCount[nextPlayer]++;
                     state->discard[nextPlayer][i] = -1;
@@ -251,6 +251,7 @@ int tributeCard (struct gameState *state, int currentPlayer) {
         }
 
         for (i = 0; i <= 2; i ++) {  //this is a bug, should only be <
+            //printf("tributeRevealedCards[%d] = %d\n\n", i, tributeRevealedCards[i]);
             if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
                 state->coins += 2;
             }
@@ -260,7 +261,7 @@ int tributeCard (struct gameState *state, int currentPlayer) {
                 drawCard(currentPlayer, state);
             }
             else { //Action Card
-                state->numActions = state->numActions - 2;  //intro bug. changed from +2 to -2.
+                state->numActions = state->numActions + 2;  //intro bug. changed from +2 to -2.
             }
         }
 
